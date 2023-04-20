@@ -1,37 +1,56 @@
 package com.example.carrental.services.impl;
 
 import com.example.carrental.models.Payment;
+import com.example.carrental.repositories.PaymentRepository;
 import com.example.carrental.services.PaymentService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
+    private PaymentRepository paymentRepository;
+
+    public PaymentServiceImpl(PaymentRepository paymentRepository) {
+        this.paymentRepository = paymentRepository;
+    }
 
     @Override
-    public void create(int id, Payment payment) {
-
+    public void create(Payment payment) {
+        paymentRepository.save(payment);
     }
 
     @Override
     public void update(int id, Payment payment) {
-
+        Payment newPayment = paymentRepository.getById(id).get(0);
+        newPayment.setPrice(payment.getPrice());
+        paymentRepository.save(newPayment);
     }
 
     @Override
     public void delete(Payment payment) {
-
+        paymentRepository.delete(payment);
     }
 
     @Override
-    public void complete(int id, Payment payment) {
-
+    public void complete(Payment payment) {
+        if(!payment.isCompleted()){
+            payment.setCompleted(true);
+            paymentRepository.save(payment);
+        }
     }
 
     @Override
     public Payment getById(int id) {
-        return null;
+        return paymentRepository.getById(id).get(0);
     }
+
+    @Override
+    public List<Payment> getAll() {
+        return paymentRepository.findAll();
+    }
+
 
 //    @Override
 //    public HttpStatus sendRequestApi(Card card, User user, double amount, String description){
