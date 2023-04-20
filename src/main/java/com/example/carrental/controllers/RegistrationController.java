@@ -34,7 +34,7 @@ public class RegistrationController {
 
     @GetMapping("user/details")
     public String editUser(Model model) {
-        User user = userService.getCurrentUser().get(0);
+        User user = userService.getCurrentUser();
         model.addAttribute("user", user);
         return "user-details";
     }
