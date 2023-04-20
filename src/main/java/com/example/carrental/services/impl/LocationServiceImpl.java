@@ -20,7 +20,7 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public void create(Location location) {
         if(locationRepository.existsByName(location.getName())) {
-            throw new DuplicateEntityException(String.format("Location with the name of %s already exists ", location.getName()));
+            throw new DuplicateEntityException(String.format("Location with the name of %s already exists!", location.getName()));
         }
         locationRepository.save(location);
     }

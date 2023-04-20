@@ -1,6 +1,8 @@
 package com.example.carrental.services;
 
 import com.example.carrental.models.Car;
+import com.example.carrental.models.Location;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
@@ -12,19 +14,25 @@ public interface CarService {
 
     void delete(Car car);
 
+    void changeAvailability(Car car);
+
+    void changeLocation(Location location, Car car);
+
+    void changeServiceDate(DateTimeFormat date, Car car);
+
     List<Car> getAll();
 
     Car getById(int id);
 
-    List<Car> getByModel(String model);
+    List<Car> getByName(String name);
 
     List<Car> getByColor(String color);
 
-    List<Car> getByTransmission(String transmission);
+    List<Car> getByTransmission(int transmission);
 
     List<Car> getByType(int type);
 
-    List<Car> getBySeats(int seats);
+    List<Car> getBySeats(int min, int max);
 
     List<Car> getByLocation(String location);
 
