@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
                         authorities);
 
         userDetailsManager.createUser(userDetails);
-        User newUser = userRepository.getByEmail(user.getEmail()).get(0);
+        User newUser = userRepository.getByEmail(user.getEmail());
 
         update(newUser.getId(),user);
     }
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getByEmail(String email) {
+    public User getByEmail(String email) {
         return userRepository.getByEmail(email);
     }
 
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getCurrentUser() {
+    public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         return getByEmail(email);

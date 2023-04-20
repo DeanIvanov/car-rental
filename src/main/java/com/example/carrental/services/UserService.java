@@ -19,11 +19,11 @@ public interface UserService {
 
     List<User> getAll();
 
-    List<User> getByEmail(String email);
+    User getByEmail(String email);
 
     User getById(int id);
 
-    List<User> getCurrentUser();
+    User getCurrentUser();
 
     List<User> getUser(String search);
 
