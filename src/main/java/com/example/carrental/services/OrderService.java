@@ -1,8 +1,11 @@
 package com.example.carrental.services;
 
+import com.example.carrental.models.Car;
 import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
@@ -14,12 +17,19 @@ public interface OrderService {
 
     void delete(Order order);
 
+    void completeOrder(Order order);
+
     List<Order> getAll();
 
-    List<Order> getById(int id);
+    Order getById(int id);
 
-    List<User> getUser(Order order);
+    List<Order> getByCurrentUser();
+    List<Order> getByUser(User user);
+
+    List<Order> getByCar(Car car);
 
     List<Order> getActive();
+
+    List<Order> getByDate(Date start, Date end);
 
 }
