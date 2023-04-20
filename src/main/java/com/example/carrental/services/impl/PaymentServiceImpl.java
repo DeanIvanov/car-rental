@@ -23,7 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void update(int id, Payment payment) {
-        Payment newPayment = paymentRepository.getById(id).get(0);
+        Payment newPayment = paymentRepository.getById(id);
         newPayment.setPrice(payment.getPrice());
         paymentRepository.save(newPayment);
     }
@@ -43,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment getById(int id) {
-        return paymentRepository.getById(id).get(0);
+        return paymentRepository.getById(id);
     }
 
     @Override

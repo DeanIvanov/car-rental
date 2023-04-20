@@ -21,6 +21,8 @@ public interface UserService {
 
     List<User> getByEmail(String email);
 
+    User getById(int id);
+
     List<User> getCurrentUser();
 
     List<User> getUser(String search);
