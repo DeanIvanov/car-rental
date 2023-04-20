@@ -1,76 +1,76 @@
-//package com.example.carrental.configurations;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.http.HttpMethod;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.provisioning.JdbcUserDetailsManager;
-//import org.springframework.security.provisioning.UserDetailsManager;
-//
-//import javax.sql.DataSource;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    private DataSource securityDataSource;
-//
-//    @Autowired
-//    public SecurityConfig(DataSource securityDataSource) {
-//        this.securityDataSource = securityDataSource;
-//    }
-//
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(securityDataSource);
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//
-//        http
-//                .csrf().disable()
+package com.example.carrental.configurations;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+public class SecurityConfig {
+
+    @Value("${spring.security.debug:false}")
+    boolean securityDebug;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+//        http.csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .requestMatchers(HttpMethod.DELETE)
+//                .hasRole("ADMIN")
+//                .requestMatchers("/admin/**")
+//                .hasAnyRole("ADMIN")
+//                .requestMatchers("/user/**")
+//                .hasAnyRole("USER", "ADMIN")
+//                .requestMatchers("/login/**")
+//                .anonymous()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
 //                .httpBasic()
 //                .and()
-//                .authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN")
-//                .antMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").authenticated()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/register").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/")
-//                .loginProcessingUrl("/authenticate")
-//                .failureUrl("/access-denied").permitAll()
-//                .and()
-//                .logout().permitAll()
-//                .logoutSuccessUrl("/").permitAll()
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/access-denied");
-//
-//    }
-//
-//
-//    @Bean
-//    public UserDetailsManager userDetailsManager() {
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-//        jdbcUserDetailsManager.setDataSource(securityDataSource);
-//        return jdbcUserDetailsManager;
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//}
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http
+                .csrf().disable()
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/user/**").authenticated()
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/register").permitAll()
+                .requestMatchers("/login").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/")
+                .loginProcessingUrl("/authenticate")
+                .failureUrl("/access-denied").permitAll()
+                .and()
+                .logout().permitAll()
+                .logoutSuccessUrl("/").permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied");
+
+        return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.debug(securityDebug)
+                .ignoring()
+                .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
+    }
+}
