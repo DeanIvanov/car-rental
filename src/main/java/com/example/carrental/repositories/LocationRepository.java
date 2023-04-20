@@ -11,7 +11,7 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
 
     Location getById(int id);
 
-    List<Location> findALl();
+    List<Location> findAll();
 
     List<Location> findAllByPhoneLikeOrNameLike(String phone, String name);
 
