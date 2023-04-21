@@ -1,11 +1,9 @@
 package com.example.carrental.services.impl;
 
-import com.example.carrental.models.Car;
+import com.example.carrental.exceptions.DuplicateEntityException;
 import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
-import com.example.carrental.repositories.CarRepository;
 import com.example.carrental.repositories.OrderRepository;
-import com.example.carrental.repositories.UserRepository;
 import com.example.carrental.services.OrderService;
 import com.example.carrental.services.UserService;
 import org.springframework.stereotype.Service;
@@ -27,12 +25,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void create(int id, Order order) {
-
+        if(orderRepository.existsByCompletedAndUserId(false, order.getUser().getId())){
+            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getEmail()));
+        }
+        orderRepository.save(order);
     }
 
     @Override
     public void update(int id, Order order) {
+        Order newOrder = orderRepository.getById(id);
+        newOrder.setCar(order.getCar());
+        newOrder.setUser(order.getUser());
+        newOrder.setStartDate(order.getStartDate());
+        newOrder.setEndDate(order.getEndDate());
+        newOrder.setPrice(order.getPrice());
+        newOrder.setLocation(order.getLocation());
+        newOrder.setPaymentType(order.getPaymentType());
+        newOrder.setPayment(order.getPayment());
+        newOrder.setCompleted(order.isCompleted());
 
+        orderRepository.save(newOrder);
     }
 
     @Override
@@ -71,8 +83,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getByCar(Car car) {
-        return orderRepository.findAllByCar(car);
+    public List<Order> getByUserId(int id) {
+        return orderRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public List<Order> getByCarId(int id) {
+        return orderRepository.findAllByCarId(id);
     }
 
     @Override

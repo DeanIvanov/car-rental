@@ -1,10 +1,8 @@
 package com.example.carrental.repositories;
 
-import com.example.carrental.models.Car;
 import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -23,8 +21,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findAllByUser(User user);
 
-    List<Order> findAllByCar(Car car);
+    List<Order> findAllByUserId(int id);
 
-//    List<Order>
+    List<Order> findAllByCarId(int id);
+
+    boolean existsByCompletedAndUserId(boolean completed, int id);
 
 }
