@@ -73,6 +73,9 @@ public class Car {
     @Size(min = 6, max = 8, message = "Registration number must be between 4 and 8 characters")
     private String registrationNumber;
 
+    @Column(name = "car_picture")
+    private String carPicture;
+
     @Column(name = "service_date")
     @DateTimeFormat
     private Date serviceDate;
@@ -83,7 +86,6 @@ public class Car {
     @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<Order> orderList;
-
 
     public int getId() {
         return id;
@@ -165,6 +167,14 @@ public class Car {
         this.registrationNumber = registrationNumber;
     }
 
+    public String getCarPicture() {
+        return carPicture;
+    }
+
+    public void setCarPicture(String carPicture) {
+        this.carPicture = carPicture;
+    }
+
     public Date getServiceDate() {
         return serviceDate;
     }
@@ -188,5 +198,7 @@ public class Car {
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
     }
+
+
 
 }

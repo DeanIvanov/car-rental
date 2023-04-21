@@ -3,14 +3,15 @@ package com.example.carrental.services;
 import com.example.carrental.models.Car;
 import com.example.carrental.models.Location;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface CarService {
 
-    void create(int id, Car car);
+    void create(int id, Car car, MultipartFile multipartFile);
 
-    void update(int id, Car car);
+    void update(int id, Car car, MultipartFile multipartFile);
 
     void delete(Car car);
 

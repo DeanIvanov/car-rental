@@ -8,7 +8,13 @@ import com.example.carrental.services.CarService;
 import com.example.carrental.services.LocationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,16 +29,26 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void create(int id, Car car) {
+    public void create(int id, Car car, MultipartFile multipartFile) {
         if(carRepository.existsByRegistrationNumber(car.getRegistrationNumber())){
             throw new DuplicateEntityException(String.format("Car with registration number %s already exists!", car.getRegistrationNumber()));
         }
-        carRepository.save(car);
+
+        Car newCar = carRepository.getById(car.getId());
+
+        String carImage = uploadFile(multipartFile);
+        car.setCarPicture(carImage);
+
+        update(newCar.getId(), car, multipartFile);
     }
 
     @Override
-    public void update(int id, Car car) {
+    public void update(int id, Car car, MultipartFile multipartFile) {
         Car newCar = carRepository.getById(id);
+        if(!multipartFile.isEmpty()){
+            String carImage = uploadFile(multipartFile);
+            newCar.setCarPicture(carImage);
+        }
         newCar.setName(car.getName());
         newCar.setModel(car.getModel());
         newCar.setType(car.getType());
@@ -44,6 +60,8 @@ public class CarServiceImpl implements CarService {
         newCar.setRegistrationNumber(car.getRegistrationNumber());
         newCar.setServiceDate(car.getServiceDate());
         newCar.setAvailable(car.isAvailable());
+
+        carRepository.save(newCar);
     }
 
     @Override
@@ -119,6 +137,35 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getByAvailability(boolean available) {
         return carRepository.findAllByAvailable(available);
+    }
+
+
+
+    private String uploadFile(MultipartFile file) {
+        if(!file.isEmpty()){
+            try {
+                byte[] bytes = file.getBytes();
+                String rootPath = "C:\\uploads";
+                File dir = new File("C:/");
+                if(!dir.exists()){
+                    dir.mkdirs();
+                }
+                String name = String.valueOf("/uploads/"+new Date().getTime()) + ".jpg";
+                File serverFile = new File(dir.getAbsolutePath()
+                        +File.separator + name);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+
+                return name;
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        } else {
+            return "/uploads/car.jpg";
+        }
+        return null;
     }
 
 }
