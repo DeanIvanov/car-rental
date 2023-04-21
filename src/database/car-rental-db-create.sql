@@ -8,24 +8,25 @@ CREATE TABLE authorities (
 
 -- Table: cars
 CREATE TABLE cars (
-    car_id int  NOT NULL AUTO_INCREMENT,
-    type int  NOT NULL,
+    car_id int(5)  NOT NULL AUTO_INCREMENT,
+    type int(5)  NOT NULL,
     name varchar(15)  NOT NULL,
     model varchar(15)  NOT NULL,
     color varchar(15)  NOT NULL,
-    location_id int  NULL,
-    transmission int  NOT NULL,
+    location_id int(5)  NULL,
+    transmission int(5)  NOT NULL,
     price double(10,2)  NOT NULL,
-    seats int  NOT NULL,
+    seats int(5)  NOT NULL,
     registration_number varchar(8)  NOT NULL,
+    car_picture blob NULL,
     service_date datetime  NULL,
-    available bit(1)  NOT NULL DEFAULT b'1',
+    available bit  NOT NULL DEFAULT b'1',
     CONSTRAINT cars_pk PRIMARY KEY (car_id)
 );
 
 -- Table: locations
 CREATE TABLE locations (
-    location_id int  NOT NULL AUTO_INCREMENT,
+    location_id int(5)  NOT NULL AUTO_INCREMENT,
     name varchar(15)  NOT NULL,
     phone varchar(13)  NOT NULL,
     CONSTRAINT locations_pk PRIMARY KEY (location_id)
@@ -33,25 +34,25 @@ CREATE TABLE locations (
 
 -- Table: orders
 CREATE TABLE orders (
-    order_id int  NOT NULL AUTO_INCREMENT,
-    car_id int  NULL,
-    user_id int  NULL,
+    order_id int(5)  NOT NULL AUTO_INCREMENT,
+    car_id int(5)  NULL,
+    user_id int(5)  NULL,
     start_date datetime  NOT NULL,
     end_date datetime  NOT NULL,
     price double(10,2)  NOT NULL,
-    location_id int  NULL,
-    payment_type int  NOT NULL,
-    payment_id int  NULL,
-    completed bit(1)  NOT NULL DEFAULT b'0',
+    location_id int(5)  NULL,
+    payment_type int(5)  NOT NULL,
+    payment_id int(5)  NULL,
+    completed bit  NOT NULL DEFAULT b'0',
     CONSTRAINT orders_pk PRIMARY KEY (order_id)
 );
 
 -- Table: payments
 CREATE TABLE payments (
-    payment_id int  NOT NULL AUTO_INCREMENT,
+    payment_id int(5)  NOT NULL AUTO_INCREMENT,
     date datetime  NOT NULL,
     price double(10,2)  NOT NULL,
-    completed bit(1)  NOT NULL DEFAULT b'0',
+    completed bit  NOT NULL DEFAULT b'0',
     CONSTRAINT payments_pk PRIMARY KEY (payment_id)
 );
 
@@ -67,7 +68,7 @@ CREATE TABLE users (
     dob datetime  NULL,
     license_number varchar(8)  NOT NULL,
     license_category varchar(2)  NOT NULL,
-    blocked bit(1)  NOT NULL DEFAULT b'0',
+    blocked bit  NOT NULL DEFAULT b'0',
     UNIQUE INDEX users_unique_keys (email),
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
