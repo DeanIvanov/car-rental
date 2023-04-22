@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sign Up</title>
+<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+</head>
+
+<body>
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <a class="navbar-brand">
+              <img id="logo" src="images/cowboy Cut.png" width="100px" height="70px">
+          </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="Sign-up nav-link" href="./sign-up.html">Sign Up</a>
+            </li>
+			  <li class="nav-item">
+              <a class="Profile nav-link" href="./profile.html">Profile</a>
+            </li>
+          </ul>
+</div>
+      </div>
+    </nav>
+	<form action="action_page.php">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+	 <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="Name" id="Name" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+	  
+	<label for="Date-of-birth"><b>Date of birth</b></label>
+	<input type="date" placeholder="Enter date of birth" name="DOB" id="DOB" required><br>
+	
+	<label for="Phone"><b>Phone number</b></label>
+	<input type="text" placeholder="Enter Phone number" name="PhoneNum" id="PhoneNum" minlength="10" maxlength="13" required>
+	
+	<label for="LicenseNum"><b>Driver’s license number</b></label>
+	<input type="text" placeholder="Enter Driver's license number" name="licenseNum" id="LicenseNum" required>
+	  
+	<label for="LicenseCat"><b>Drivers's license Category (Hold Control to select multiple)</b></label><br>
+	<select name="Categories" id="licenseCat" multiple required>
+  	<option value="AM">AM</option>
+  	<option value="A1">A1</option>
+  	<option value="A2">A2</option>
+  	<option value="B">B</option>
+	<option value="C">C</option>
+	<option value="C+E">C+E</option>
+	<option value="D">D</option>
+	</select>
+
+    <hr>
+
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <button type="submit" class="registerbtn">Register</button>
+  </div>
+
+  <div class="container signin">
+    <p>Already have an account? <a href="./sign-in.html">Sign in</a>.</p>
+  </div>
+</form>
+</body>
+</html>
