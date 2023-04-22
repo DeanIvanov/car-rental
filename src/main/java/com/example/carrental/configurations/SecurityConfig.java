@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
-    @Value("${spring.security.debug:true}")
+    @Value("${spring.security.debug:false}")
     boolean securityDebug;
 
     @Bean
@@ -44,14 +44,14 @@ public class SecurityConfig {
                 .csrf().disable()
                 .httpBasic()
                 .and()
-                .authorizeRequests()
-//                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN")
-//                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("USER", "ADMIN")
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/user/**").authenticated()
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/user/**").authenticated()
                 .requestMatchers("/").permitAll()
-//                .requestMatchers("/register").permitAll()
-//                .requestMatchers("/login").permitAll()
+                .requestMatchers("/register").permitAll()
+                .requestMatchers("/login").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

@@ -110,6 +110,11 @@ public class UserServiceImpl implements UserService {
         return user.getOrderList();
     }
 
+    @Override
+    public String encodePass(String password) {
+        return passwordEncoder.encode(password);
+    }
+
 
     private void validateUserInput(User user) {
         if(user.getName() == null || user.getName().length() < 2 || user.getName().length() > 15) {

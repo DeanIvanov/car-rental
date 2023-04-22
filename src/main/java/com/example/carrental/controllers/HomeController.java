@@ -12,16 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-    private UserService userService;
-
-    @Autowired
-    public HomeController(UserService userService) {
-        this.userService = userService;
+    public HomeController() {
     }
 
     @GetMapping("/")
     public String showHomePage() {
-        System.out.println(userService.encodePass("12345678"));
         return "index";
     }
 
@@ -30,7 +25,6 @@ public class HomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Authorities authorities = new Authorities();
         authorities.getAuthority().equals(authentication);
-        System.out.println(String.format("Logged in user: %s", userService.getCurrentUser().getEmail()));
         return "index";
     }
 

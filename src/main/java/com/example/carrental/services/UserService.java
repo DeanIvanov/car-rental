@@ -29,4 +29,6 @@ public interface UserService {
 
     List<Order> getOrder(User user);
 
+    String encodePass(String password);
+
 }
