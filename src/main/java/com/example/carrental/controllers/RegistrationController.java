@@ -2,6 +2,7 @@ package com.example.carrental.controllers;
 
 import com.example.carrental.models.User;
 import com.example.carrental.services.UserService;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,14 @@ public class RegistrationController {
 
     @PostMapping(value = "/register")
     public String registerUser(@Valid @ModelAttribute("user")User user) {
+        System. out. println(String.format("User Name: %s", user.getName()));
+        System. out. println(String.format("User Name: %s", user.getSurname()));
+        System. out. println(String.format("User Name: %s", user.getEmail()));
+        System. out. println(String.format("User Name: %s", user.getPassword()));
+        System. out. println(String.format("User Name: %s", user.getPhone()));
+        System. out. println(String.format("User Name: %s", user.getDob()));
+        System. out. println(String.format("User Name: %s", user.getLicenseNumber()));
+        System. out. println(String.format("User Name: %s", user.getLicenseCategory()));
         userService.create(user.getId(),user);
         return "index";
     }
