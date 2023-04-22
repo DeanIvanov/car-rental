@@ -29,7 +29,7 @@ public class RegistrationController {
     @PostMapping(value = "/register")
     public String registerUser(@Valid @ModelAttribute("user")User user) {
         userService.create(user.getId(),user);
-        return "registration-confirmation";
+        return "index";
     }
 
     @GetMapping("user/details")
