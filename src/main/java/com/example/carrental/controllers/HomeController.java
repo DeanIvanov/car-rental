@@ -34,5 +34,4 @@ public class HomeController {
         return "access-denied";
     }
 
-
 }

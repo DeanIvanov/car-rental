@@ -23,7 +23,7 @@ public class RegistrationController {
 
     @GetMapping(value = "/register")
     public String showRegister(){
-        return "index";
+        return "sign-up";
     }
 
     @PostMapping(value = "/register")
