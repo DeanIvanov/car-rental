@@ -25,12 +25,14 @@ public class RegistrationController {
     @GetMapping(value = "/register")
     public String showRegister(){
         return "sign-up";
+
     }
 
     @PostMapping(value = "/register")
     public String registerUser(@Valid @ModelAttribute("user")User user) {
         userService.create(user.getId(),user);
         return "index";
+
     }
 
     @GetMapping("user/details")
@@ -38,6 +40,7 @@ public class RegistrationController {
         User user = userService.getCurrentUser();
         model.addAttribute("user", user);
         return "index";
+
     }
 
 

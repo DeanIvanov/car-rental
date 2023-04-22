@@ -18,6 +18,7 @@ public class HomeController {
     @GetMapping("/")
     public String showHomePage() {
         return "index";
+
     }
 
     @PostMapping("/authenticate")
@@ -26,11 +27,13 @@ public class HomeController {
         Authorities authorities = new Authorities();
         authorities.getAuthority().equals(authentication);
         return "index";
+
     }
 
     @GetMapping("/access-denied")
     public String showAccessDenied() {
         return "access-denied";
+
     }
 
 }
