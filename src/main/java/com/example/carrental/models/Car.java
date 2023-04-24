@@ -44,7 +44,7 @@ public class Car {
 
     @Column(name = "transmission")
     @NotNull
-    private int transmission;
+    private String transmission;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -119,11 +119,11 @@ public class Car {
         this.color = color;
     }
 
-    public int getTransmission() {
+    public String getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(int transmission) {
+    public void setTransmission(String transmission) {
         this.transmission = transmission;
     }
 

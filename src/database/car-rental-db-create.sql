@@ -14,7 +14,7 @@ CREATE TABLE cars (
     model varchar(15)  NOT NULL,
     color varchar(15)  NOT NULL,
     location_id int(5)  NULL,
-    transmission int(5)  NOT NULL,
+    transmission varchar(15)  NOT NULL,
     price double(10,2)  NOT NULL,
     seats int(5)  NOT NULL,
     registration_number varchar(8)  NOT NULL,

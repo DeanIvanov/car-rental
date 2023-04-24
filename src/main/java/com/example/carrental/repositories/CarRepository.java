@@ -18,7 +18,7 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     List<Car> findAllByColor(String color);
 
-    List<Car> findAllByTransmission(int transmission);
+    List<Car> findAllByTransmission(String transmission);
 
     List<Car> findAllByType(int type);
 

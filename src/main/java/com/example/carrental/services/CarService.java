@@ -29,7 +29,7 @@ public interface CarService {
 
     List<Car> getByColor(String color);
 
-    List<Car> getByTransmission(int transmission);
+    List<Car> getByTransmission(String transmission);
 
     List<Car> getByType(int type);
 

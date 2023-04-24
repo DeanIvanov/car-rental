@@ -117,7 +117,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getByTransmission(int transmission) {
+    public List<Car> getByTransmission(String transmission) {
         return carRepository.findAllByTransmission(transmission);
     }
 
