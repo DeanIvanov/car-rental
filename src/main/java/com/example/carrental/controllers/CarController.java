@@ -23,13 +23,13 @@ public class CarController {
 
     @GetMapping(value = "/car-register")
     public String showRegister(){
-        return "index";
+        return "add-car";
     }
 
     @PostMapping(value = "/car-register")
     public String registerUser(@Valid @ModelAttribute("car") Car car,
                                @RequestParam("file") MultipartFile multipart) {
         carService.create(car.getId(), car, multipart);
-        return "registration-confirmation";
+        return "index";
     }
 }

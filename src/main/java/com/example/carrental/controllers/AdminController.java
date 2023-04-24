@@ -39,6 +39,13 @@ public class AdminController {
         return "admin-cars";
     }
 
+    @GetMapping("admin/cars/active")
+    public String showAvailableCars(Model model) {
+        List<Car> carList = carService.getByAvailability(true);
+        model.addAttribute("cars", carList);
+        return "admin-cars-active";
+    }
+
     @GetMapping("admin/orders")
     public String showOrders(Model model) {
         List<Order> orderList = orderService.getAll();
