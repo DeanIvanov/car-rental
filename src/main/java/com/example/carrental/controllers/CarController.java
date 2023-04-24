@@ -30,7 +30,7 @@ public class CarController {
     }
 
     @PostMapping(value = "/car-register")
-    public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("location") String locationName,
+    public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("locationName") String locationName,
                                @RequestParam("file") MultipartFile multipart) {
         car.setLocation(locationService.getLocation(locationName).get(0));
         carService.create(car.getId(), car, multipart);
