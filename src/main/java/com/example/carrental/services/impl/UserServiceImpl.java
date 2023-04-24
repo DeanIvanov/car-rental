@@ -50,9 +50,12 @@ public class UserServiceImpl implements UserService {
 //                        authorities);
 //
 //        userDetailsManager.createUser(userDetails);
-        User newUser = userRepository.getByEmail(user.getEmail());
+//        User newUser = userRepository.getByEmail(user.getEmail());
+//
+//        update(newUser.getId(),user);
 
-        update(newUser.getId(),user);
+        userRepository.save(user);
+
     }
 
     @Override
