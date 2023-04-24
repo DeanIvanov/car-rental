@@ -20,7 +20,7 @@
         <th class="header">available</th>
     </tr>
     <tr th:each="car : ${cars}">
-        <td class="img" th:src="${car.carPicture}" width="100" height="120">img</td>
+        <td> <img class="img" th:src="${car.carPicture}" width="100" height="120"></td>
         <td class="id" th:text="${car.id}">id</td>
         <td class="name" th:text="${car.name}">name</td>
         <td class="model" th:text="${car.model}">model</td>

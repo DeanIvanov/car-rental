@@ -9,26 +9,16 @@
 <div>
     <h1><a href="admin.html"><- BACK</a></h1>
 </div>
-<div class="date">
-    <label>Pick up date:</label>
-    <input class="input-date" type="date">
-    <input class="button" type="submit" name="refresh-table" value="select date">
-</div>
 
-<table class="users">
-    <tr>
-        <th class="header">ID</th>
-        <th class="header">Name</th>
-        <th class="header">Model</th>
-        <th class="header">registration number</th>
-        <th class="header">price</th>
-    </tr>
-    <tr>
-        <td class="id">123456</td>
-        <td class="name">Kia</td>
-        <td class="model">sorento</td>
-        <td class="reg-number">123456789</td>
-        <td class="price">155$</td>
+<table class="cars-available">
+    <tr th:each="car : ${cars}">
+        <td> <img class="img" th:src="${car.carPicture}" width="100" height="120"></td>
+        <td class="id" th:text="${car.id}">id</td>
+        <td class="name" th:text="${car.name}">name</td>
+        <td class="model" th:text="${car.model}">model</td>
+        <td class="reg-number" th:text="${car.registrationNumber}">regnum</td>
+        <td class="price" th:text="${car.price}">price</td>
+        <td class="available" th:text="${car.available}">available</td>
     </tr>
 </table>
 </body>
