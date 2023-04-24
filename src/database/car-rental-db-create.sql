@@ -44,6 +44,7 @@ CREATE TABLE orders (
     payment_type int(5)  NOT NULL,
     payment_id int(5)  NULL,
     completed bit  not null default 0,
+    active bit  not null default 0,
     CONSTRAINT orders_pk PRIMARY KEY (order_id)
 );
 

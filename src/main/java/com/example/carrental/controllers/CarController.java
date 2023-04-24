@@ -46,13 +46,12 @@ public class CarController {
         return "index";
     }
 
-    @GetMapping(value = "/car-search")
+    @GetMapping(value = "search")
     public String showSearch(Model model){
         List<Car> carList = carService.getByAvailability(true);
         model.addAttribute("cars", carList);
         return "search";
     }
-
 
     private String uploadFile(MultipartFile file) {
         if(!file.isEmpty()){

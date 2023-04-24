@@ -61,6 +61,10 @@ public class Order {
     @NotNull
     private boolean completed;
 
+    @Column(name = "active")
+    @NotNull
+    private boolean active;
+
 
     public int getId() {
         return id;
@@ -142,4 +146,11 @@ public class Order {
         this.completed = completed;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

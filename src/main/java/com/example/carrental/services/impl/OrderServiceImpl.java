@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
         newOrder.setLocation(order.getLocation());
         newOrder.setPaymentType(order.getPaymentType());
         newOrder.setPayment(order.getPayment());
-        newOrder.setCompleted(order.isCompleted());
+        newOrder.setCompleted(false);
+        newOrder.setActive(true);
 
         orderRepository.save(newOrder);
     }
