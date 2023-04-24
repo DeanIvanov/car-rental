@@ -4,7 +4,6 @@ import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
@@ -23,12 +22,12 @@ public interface UserService {
 
     User getById(int id);
 
-    User getCurrentUser();
+//    User getCurrentUser();
 
     List<User> getUser(String search);
 
     List<Order> getOrder(User user);
 
-    String encodePass(String password);
+//    String encodePass(String password);
 
 }

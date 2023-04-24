@@ -2,7 +2,6 @@ package com.example.carrental.controllers;
 
 import com.example.carrental.models.User;
 import com.example.carrental.services.UserService;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ public class RegistrationController {
 
     @GetMapping(value = "/register")
     public String showRegister(){
-        return "sign-up";
+        return "register";
 
     }
 
@@ -35,13 +34,13 @@ public class RegistrationController {
 
     }
 
-    @GetMapping("user/details")
-    public String editUser(Model model) {
-        User user = userService.getCurrentUser();
-        model.addAttribute("user", user);
-        return "index";
-
-    }
+//    @GetMapping("user/details")
+//    public String editUser(Model model) {
+//        User user = userService.getCurrentUser();
+//        model.addAttribute("user", user);
+//        return "index";
+//
+//    }
 
 
 

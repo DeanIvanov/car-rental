@@ -21,7 +21,7 @@ public interface OrderService {
 
     Order getById(int id);
 
-    List<Order> getByCurrentUser();
+//    List<Order> getByCurrentUser();
 
     List<Order> getByUser(User user);
 

@@ -72,10 +72,10 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getById(id);
     }
 
-    @Override
-    public List<Order> getByCurrentUser() {
-        return orderRepository.findAllByUser(userService.getCurrentUser());
-    }
+//    @Override
+//    public List<Order> getByCurrentUser() {
+//        return orderRepository.findAllByUser(userService.getCurrentUser());
+//    }
 
     @Override
     public List<Order> getByUser(User user) {
