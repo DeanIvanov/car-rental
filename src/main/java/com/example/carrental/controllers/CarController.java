@@ -44,6 +44,12 @@ public class CarController {
         return "index";
     }
 
+    @GetMapping(value = "/car-search")
+    public String showSearch(){
+        return "search";
+    }
+
+
     private String uploadFile(MultipartFile file) {
         if(!file.isEmpty()){
             try {
