@@ -21,7 +21,7 @@ public class LocationController {
 
     @GetMapping(value = "/location-register")
     public String showRegister(){
-        return "add-register";
+        return "add-location";
 
     }
 
