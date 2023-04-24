@@ -20,7 +20,7 @@ CREATE TABLE cars (
     registration_number varchar(8)  NOT NULL,
     car_picture blob NULL,
     service_date datetime  NULL,
-    available bit  NOT NULL DEFAULT b'1',
+    available bit  NOT NULL DEFAULT 1,
     CONSTRAINT cars_pk PRIMARY KEY (car_id)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE orders (
     location_id int(5)  NULL,
     payment_type int(5)  NOT NULL,
     payment_id int(5)  NULL,
-    completed bit  NOT NULL DEFAULT b'0',
+    completed bit  not null default 0,
     CONSTRAINT orders_pk PRIMARY KEY (order_id)
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE payments (
     payment_id int(5)  NOT NULL AUTO_INCREMENT,
     date datetime  NOT NULL,
     price double(10,2)  NOT NULL,
-    completed bit  NOT NULL DEFAULT b'0',
+    completed bit  not null default 0,
     CONSTRAINT payments_pk PRIMARY KEY (payment_id)
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE users (
     dob datetime  NULL,
     license_number varchar(8)  NOT NULL,
     license_category varchar(2)  NOT NULL,
-    blocked bit  NOT NULL DEFAULT b'0',
+    blocked bit  not null default 0,
     UNIQUE INDEX users_unique_keys (email),
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
