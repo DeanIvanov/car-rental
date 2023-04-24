@@ -8,7 +8,7 @@ import com.example.carrental.services.OrderService;
 import com.example.carrental.services.UserService;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getByDate(Date start, Date end) {
+    public List<Order> getByDate(LocalDate start, LocalDate end) {
         return orderRepository.findAllByStartDateBetweenOrEndDateBetween(start, end, start, end);
     }
 

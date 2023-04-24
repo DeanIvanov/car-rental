@@ -7,7 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "orders")
@@ -32,11 +33,11 @@ public class Order {
 
     @Column(name = "start_date")
     @DateTimeFormat
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
     @DateTimeFormat
-    private Date endDate;
+    private LocalDate endDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -87,19 +88,19 @@ public class Order {
         this.car = car;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

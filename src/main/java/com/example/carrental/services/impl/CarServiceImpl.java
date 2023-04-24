@@ -14,6 +14,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void changeServiceDate(DateTimeFormat date, Car car) {
+    public void changeServiceDate(LocalDate date, Car car) {
         Car newCar = carRepository.getById(car.getId());
         newCar.setServiceDate(car.getServiceDate());
         carRepository.save(newCar);

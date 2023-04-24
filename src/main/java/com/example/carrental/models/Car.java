@@ -8,7 +8,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -78,7 +78,7 @@ public class Car {
 
     @Column(name = "service_date")
     @DateTimeFormat
-    private Date serviceDate;
+    private LocalDate serviceDate;
 
     @Column(name = "available")
     private boolean available;
@@ -175,11 +175,11 @@ public class Car {
         this.carPicture = carPicture;
     }
 
-    public Date getServiceDate() {
+    public LocalDate getServiceDate() {
         return serviceDate;
     }
 
-    public void setServiceDate(Date serviceDate) {
+    public void setServiceDate(LocalDate serviceDate) {
         this.serviceDate = serviceDate;
     }
 

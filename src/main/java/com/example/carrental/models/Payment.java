@@ -7,7 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "payments")
@@ -22,7 +22,7 @@ public class Payment {
 
     @Column(name = "date")
     @DateTimeFormat
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "price")
     @NotNull
@@ -43,8 +43,9 @@ public class Payment {
     @Size(min = 16, max = 16, message = "Card number must be exactly 16 digits")
     private int cardNumber;
 
-    @DateTimeFormat
-    private Date expiryDate;
+    @NotNull
+    @NotBlank
+    private String expiryDate;
 
     @NotNull
     @NotBlank
@@ -59,11 +60,11 @@ public class Payment {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -99,11 +100,11 @@ public class Payment {
         this.cardNumber = cardNumber;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 

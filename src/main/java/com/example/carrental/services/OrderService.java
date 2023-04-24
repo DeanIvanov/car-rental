@@ -3,7 +3,7 @@ package com.example.carrental.services;
 import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderService {
@@ -31,6 +31,6 @@ public interface OrderService {
 
     List<Order> getActive();
 
-    List<Order> getByDate(Date start, Date end);
+    List<Order> getByDate(LocalDate start, LocalDate end);
 
 }

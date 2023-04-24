@@ -2,9 +2,9 @@ package com.example.carrental.services;
 
 import com.example.carrental.models.Car;
 import com.example.carrental.models.Location;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CarService {
@@ -19,7 +19,7 @@ public interface CarService {
 
     void changeLocation(Location location, Car car);
 
-    void changeServiceDate(DateTimeFormat date, Car car);
+    void changeServiceDate(LocalDate date, Car car);
 
     List<Car> getAll();
 

@@ -8,7 +8,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -55,7 +55,7 @@ public class User {
 
     @Column(name = "dob")
     @DateTimeFormat
-    private Date dob;
+    private LocalDate dob;
 
     @Column(name = "license_number")
     @NotNull
@@ -131,11 +131,11 @@ public class User {
         this.address = address;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

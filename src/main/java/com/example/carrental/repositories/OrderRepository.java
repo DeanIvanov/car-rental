@@ -5,7 +5,7 @@ import com.example.carrental.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -17,7 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findAllByCompleted(boolean completed);
 
-    List<Order> findAllByStartDateBetweenOrEndDateBetween(Date startMin, Date startMax, Date endMin, Date endMax);
+    List<Order> findAllByStartDateBetweenOrEndDateBetween(LocalDate startMin, LocalDate startMax, LocalDate endMin, LocalDate endMax);
 
     List<Order> findAllByUser(User user);
 
