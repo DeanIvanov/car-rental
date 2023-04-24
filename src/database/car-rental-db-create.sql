@@ -100,3 +100,26 @@ ALTER TABLE orders ADD CONSTRAINT orders_payments FOREIGN KEY orders_payments (p
 -- Reference: orders_users (table: orders)
 ALTER TABLE orders ADD CONSTRAINT orders_users FOREIGN KEY orders_users (user_id)
     REFERENCES users (user_id);
+
+-- Temps added
+INSERT INTO `car-rental`.locations (location_id, name, phone)
+VALUES (1, 'Sofia', '0885123456');
+
+INSERT INTO `car-rental`.locations (location_id, name, phone)
+VALUES (2, 'Ruse', '0885123456');
+
+INSERT INTO `car-rental`.locations (location_id, name, phone)
+VALUES (3, 'Varna', '0885123465');
+
+INSERT INTO `car-rental`.users (user_id, name, surname, email, password, phone, address, dob, license_number,
+                                license_category, blocked)
+VALUES (1, 'temp', 'temp', 'temp@gmail.com', '123456789', '0123456789', 'Temp Address', '1990-01-01 00:00:00',
+        '12345678', 'B1', true);
+
+INSERT INTO `car-rental`.payments (payment_id, date, price, completed)
+VALUES (1, '1990-01-01 00:00:00', 0, true);
+
+INSERT INTO `car-rental`.cars (car_id, type, name, model, color, location_id, transmission, price, seats,
+                               registration_number, car_picture, service_date, available)
+VALUES (1, 3, 'Temp', 'Temp', 'red', 1, 'Manual', 0, 1, '12345678', null, '1990-01-01 00:00:00', false);
+
