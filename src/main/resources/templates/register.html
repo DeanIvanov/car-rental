@@ -33,32 +33,33 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 	 <label th:for="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name"  th:name="name" th:id="name" required>
+    <input type="text" minlength="2" maxlength="15" placeholder="Enter First Name"  th:name="name" th:id="name" required>
 
     <label th:for="surname"><b>surname</b></label>
-    <input type="text" placeholder="Enter Name"  th:name="surname" th:id="surname" required>
+    <input type="text" minlength="3" maxlength="20" placeholder="Enter Surname"  th:name="surname" th:id="surname" required>
 
     <label th:for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" th:name="email" th:id="email" required>
+    <input type="text"  minlength="7" maxlength="50"
+           placeholder="Enter Email" th:name="email" th:id="email" required>
 
     <label th:for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" th:name="password" th:id="password" required>
+    <input type="password" minlength="5" maxlength="68" placeholder="Enter Password" th:name="password" th:id="password" required>
 
 	<label th:for="dob"><b>Date of birth</b></label>
 	<input type="date" placeholder="Enter date of birth" th:name="dob" th:id="dob" required><br>
 	
 	<label th:for="phone"><b>Phone number</b></label>
-	<input type="text" placeholder="Enter Phone number" th:name="phone" th:id="phone" minlength="10" maxlength="13" required>
+	<input type="text" minlength="10" maxlength="13" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  placeholder="Enter Phone number" th:name="phone" th:id="phone"required>
 
       <label th:for="address"><b>Address</b></label>
-      <input type="text" placeholder="Enter address" th:name="address" th:id="address" required>
+      <input type="text" minlength="10" maxlength="100" placeholder="Enter address" th:name="address" th:id="address" required>
 	
-	<label th:for="License_number"><b>Driver’s license number</b></label>
-	<input type="text" placeholder="Enter Driver's license number" th:name="license_number" th:id="License_number" required>
+	<label th:for="licenseNumber"><b>Driver’s license number</b></label>
+	<input type="text" minlength="6" maxlength="8" placeholder="Enter Driver's license number" th:name="licenseNumber" th:id="licenseNumber" required>
 	  
 
-    <label th:for="license_category"><b>Drivers's license Category (Hold Control to select multiple)</b></label><br>
-    <select th:name="license_category" th:id="license_category" multiple required>
+    <label th:for="licenseCategory"><b>Drivers's license Category (Hold Control to select multiple)</b></label><br>
+    <select th:name="licenseCategory" th:id="licenseCategory" multiple required>
        <option th:value="AM" th:text="AM"></option>
        <option th:value="A1"th:text="A1"></option>
        <option th:value="A2"th:text="A2"></option>
@@ -75,7 +76,7 @@
   </div>
 
   <div class="container signin">
-    <p>Already have an account? <a href="./sign-in.html">Sign in</a>.</p>
+    <p>Already have an account? <a href="login.html">Sign in</a>.</p>
   </div>
 </form>
 </body>

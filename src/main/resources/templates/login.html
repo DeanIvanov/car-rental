@@ -33,10 +33,10 @@
     <p>Please fill in this form to enter your account.</p>
     <hr>
     <label th:for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" th:name="email" th:id="email" required>
+    <input type="text"  minlength="7" maxlength="50" placeholder="Enter Email" th:name="email" th:id="email" required>
 
     <label th:for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" th:name="password" th:id="password" required>
+    <input type="password" minlength="5" maxlength="68" placeholder="Enter Password" th:name="password" th:id="password" required>
 
     <hr>
 
@@ -44,7 +44,7 @@
   </div>
 
   <div class="container signin">
-    <p>Dont have an account? <a href="./SignUp.html">Sign up</a>.</p>
+    <p>Dont have an account? <a href="register.html">Sign up</a>.</p>
   </div>
 </form>
 </body>
