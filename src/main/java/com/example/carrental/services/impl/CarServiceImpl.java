@@ -40,7 +40,9 @@ public class CarServiceImpl implements CarService {
         String carImage = uploadFile(multipartFile);
         car.setCarPicture(carImage);
 
-        update(newCar.getId(), car, multipartFile);
+//        update(newCar.getId(), car, multipartFile);
+
+        carRepository.save(car);
     }
 
     @Override
