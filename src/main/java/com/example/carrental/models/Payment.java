@@ -30,7 +30,6 @@ public class Payment {
 
     @Column(name = "completed")
     @NotNull
-    @NotBlank
     private boolean completed;
 
     @NotNull
@@ -41,15 +40,13 @@ public class Payment {
     @NotNull
     @NotBlank
     @Size(min = 16, max = 16, message = "Card number must be exactly 16 digits")
-    private int cardNumber;
+    private String cardNumber;
 
     @NotNull
     @NotBlank
     private String expiryDate;
 
     @NotNull
-    @NotBlank
-    @Size(min = 3, max = 3, message = "Security code must be exactly 3 digits")
     private int cvc;
 
     public int getId() {
@@ -92,11 +89,11 @@ public class Payment {
         this.name = name;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

@@ -46,7 +46,6 @@ public class Order {
 
     @Column(name = "payment_type")
     @NotNull
-    @NotBlank
     private int paymentType;
 
     @JsonIgnore
@@ -60,7 +59,6 @@ public class Order {
 
     @Column(name = "completed")
     @NotNull
-    @NotBlank
     private boolean completed;
 
 

@@ -24,18 +24,15 @@ public class Car {
 
     @Column(name = "type")
     @NotNull
-    @NotBlank
     private int type;
 
     @Column(name = "name")
     @NotNull
-    @NotBlank
     @Size(min = 2, max = 15, message = "Name must be between 2 and 15")
     private String name;
 
     @Column(name = "model")
     @NotNull
-    @NotBlank
     @Size(min = 4, max = 20, message = "Model must be between 4 and 20")
     private String model;
 
@@ -47,7 +44,6 @@ public class Car {
 
     @Column(name = "transmission")
     @NotNull
-    @NotBlank
     private int transmission;
 
     @JsonIgnore
@@ -61,7 +57,6 @@ public class Car {
 
     @Column(name = "seats")
     @NotNull
-    @NotBlank
     private int seats;
 
     @Column(name = "registration_number")
