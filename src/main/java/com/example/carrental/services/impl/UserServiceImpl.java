@@ -60,8 +60,13 @@ public class UserServiceImpl implements UserService {
         User newUser = userRepository.getById(id);
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(user.getPassword());
+        newUser.setDob(user.getDob());
         newUser.setPhone(user.getPhone());
         newUser.setAddress(user.getAddress());
+        newUser.setLicenseNumber(user.getLicenseNumber());
+        newUser.setLicenseCategory(user.getLicenseCategory());
         newUser.setBlocked(false);
 
         validateUserInput(newUser);
