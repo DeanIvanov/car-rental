@@ -35,10 +35,10 @@ public class CarServiceImpl implements CarService {
             throw new DuplicateEntityException(String.format("Car with registration number %s already exists!", car.getRegistrationNumber()));
         }
 
-        Car newCar = carRepository.getById(car.getId());
-
-        String carImage = uploadFile(multipartFile);
-        car.setCarPicture(carImage);
+        if(!multipartFile.isEmpty()){
+            String carImage = uploadFile(multipartFile);
+            car.setCarPicture(carImage);
+        }
 
 //        update(newCar.getId(), car, multipartFile);
 
