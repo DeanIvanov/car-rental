@@ -25,7 +25,6 @@ public class Car {
     @Column(name = "type")
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 1, message = "Car type must be exactly 1 digit")
     private int type;
 
     @Column(name = "name")
@@ -49,7 +48,6 @@ public class Car {
     @Column(name = "transmission")
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 1, message = "Transmission type must be exactly 1 digit")
     private int transmission;
 
     @JsonIgnore
@@ -64,7 +62,6 @@ public class Car {
     @Column(name = "seats")
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 1, message = "Seats amount must be exactly 1 digit")
     private int seats;
 
     @Column(name = "registration_number")
