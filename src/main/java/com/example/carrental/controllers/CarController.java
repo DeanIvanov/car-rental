@@ -34,15 +34,19 @@ public class CarController {
 
     @GetMapping(value = "/car-register")
     public String showRegister(){
+
         return "add-car";
     }
 
     @PostMapping(value = "/car-register")
     public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("locationName") String locationName,
                                @RequestParam("file") MultipartFile multipart) {
+
         car.setLocation(locationService.getLocation(locationName).get(0));
         car.setCarPicture(uploadFile(multipart));
+
         carService.create(car.getId(), car, multipart);
+
         return "index";
     }
 
@@ -72,4 +76,5 @@ public class CarController {
         }
         return null;
     }
+
 }

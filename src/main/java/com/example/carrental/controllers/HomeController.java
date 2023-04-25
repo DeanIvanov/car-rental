@@ -11,28 +11,30 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHomePage() {
-        return "index";
 
+        return "index";
     }
 
 //    @PostMapping("/authenticate")
 //    public String showRegisterConfirmation() {
+//
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        Authorities authorities = new Authorities();
 //        authorities.getAuthority().equals(authentication);
-//        return "index";
 //
+//        return "index";
 //    }
 
     @GetMapping(value = "/login")
     public String showLogin(){
+
         return "login";
     }
 
     @GetMapping("/access-denied")
     public String showAccessDenied() {
-        return "access-denied";
 
+        return "access-denied";
     }
 
 }

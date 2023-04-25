@@ -21,15 +21,16 @@ public class LocationController {
 
     @GetMapping(value = "/location-register")
     public String showRegister(){
-        return "add-location";
 
+        return "add-location";
     }
 
     @PostMapping(value = "/location-register")
     public String registerLocation(@Valid @ModelAttribute("location") Location location) {
-        locationService.create(location);
-        return "index";
 
+        locationService.create(location);
+
+        return "index";
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 
 import jakarta.validation.Valid;
 
@@ -22,25 +23,16 @@ public class RegistrationController {
 
     @GetMapping(value = "/register")
     public String showRegister(){
-        return "register";
 
+        return "register";
     }
 
     @PostMapping(value = "/register")
     public String registerUser(@Valid @ModelAttribute("user")User user) {
+
         userService.create(user.getId(),user);
+
         return "index";
-
     }
-
-//    @GetMapping("user/details")
-//    public String editUser(Model model) {
-//        User user = userService.getCurrentUser();
-//        model.addAttribute("user", user);
-//        return "index";
-//
-//    }
-
-
 
 }

@@ -59,9 +59,12 @@ public class OrderController {
 
     @GetMapping(value = "search-results")
     public String showSearch(Model model){
+
         int locationId = orderService.getLatestOrder().getLocation().getId();
+
         List<Car> carList = carService.getAvailableForLocationId(true, locationId);
         model.addAttribute("cars", carList);
+
         return "car-results";
     }
 
@@ -73,8 +76,6 @@ public class OrderController {
         Car car = carService.getById(carId);
 
         order.setCar(car);
-
-        System.out.println(orderService.calculateTotalPrice(order));
 
         orderService.update(order.getId(), order);
 
@@ -93,26 +94,13 @@ public class OrderController {
         return "payment";
     }
 
-    @PostMapping(value = "/select-payment")
-    public String paymentSelect(@RequestParam("paymentType") int paymentType) {
-
-        Order order = orderService.getLatestOrder();
-
-        if(paymentType==1) {
-            order.setPaymentType(1);
-            orderService.update(order.getId(), order);
-            return "redirect:/cash";
-        } else {
-            order.setPaymentType(2);
-            orderService.update(order.getId(), order);
-            return "redirect:/checkout";
-        }
-    }
-
     @GetMapping(value = "cash")
     public String cashCheckout(Model model) {
 
         Order order = orderService.getLatestOrder();
+
+        order.setPaymentType(2);
+
         model.addAttribute("order", order);
 
         return "cash";
@@ -122,6 +110,7 @@ public class OrderController {
     public String cardCheckout(Model model) {
 
         Order order = orderService.getLatestOrder();
+
         model.addAttribute("order", order);
 
         return "checkout";
@@ -140,6 +129,7 @@ public class OrderController {
         paymentService.create(payment);
 
         order.setPayment(payment);
+        order.setPaymentType(2);
         orderService.update(order.getId(), order);
 
         return "redirect:/success";
@@ -151,6 +141,5 @@ public class OrderController {
 
         return "success";
     }
-
 
 }
