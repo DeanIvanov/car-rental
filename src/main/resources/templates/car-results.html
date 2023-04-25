@@ -32,7 +32,7 @@
     <hr>
     <div class="container">
       <div class="row text-center">
-          <form action="">
+          <form th:action="@{/select-car}" th:object="${car}" th:method="post">
         <div class="col-md-4 pb-1 pb-md-0" th:each="car : ${cars}">
           <div class="card">
             <img class="card-img-top" th:src="${car.carPicture}" width="100" height="120">
