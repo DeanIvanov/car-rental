@@ -46,12 +46,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void update(int id, Car car, MultipartFile multipartFile) {
+    public void update(int id, Car car) {
         Car newCar = carRepository.getById(id);
-        if(!multipartFile.isEmpty()){
-            String carImage = uploadFile(multipartFile);
-            newCar.setCarPicture(carImage);
-        }
+
         newCar.setName(car.getName());
         newCar.setModel(car.getModel());
         newCar.setType(car.getType());
@@ -63,6 +60,7 @@ public class CarServiceImpl implements CarService {
         newCar.setRegistrationNumber(car.getRegistrationNumber());
         newCar.setServiceDate(car.getServiceDate());
         newCar.setAvailable(car.isAvailable());
+        newCar.setCarPicture(car.getCarPicture());
 
         carRepository.save(newCar);
     }

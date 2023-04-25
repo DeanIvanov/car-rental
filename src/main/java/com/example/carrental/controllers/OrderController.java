@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -149,6 +150,11 @@ public class OrderController {
     @GetMapping(value = "success")
     public String confirmOrder() {
 
+        Order order = orderService.getLatestOrder();
+
+        Car car = carService.getById(order.getCar().getId());
+        car.setAvailable(false);
+        carService.update(car.getId(), car);
 
         return "success";
     }

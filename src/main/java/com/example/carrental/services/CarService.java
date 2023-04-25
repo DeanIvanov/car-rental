@@ -11,7 +11,7 @@ public interface CarService {
 
     void create(int id, Car car, MultipartFile multipartFile);
 
-    void update(int id, Car car, MultipartFile multipartFile);
+    void update(int id, Car car);
 
     void delete(Car car);
 
