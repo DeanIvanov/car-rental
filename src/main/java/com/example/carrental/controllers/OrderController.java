@@ -99,7 +99,16 @@ public class OrderController {
 
         Order order = orderService.getLatestOrder();
 
-        order.setPaymentType(2);
+        Payment payment = new Payment();
+        payment.setDate(LocalDate.now());
+        payment.setPrice(order.getPrice());
+        payment.setCompleted(true);
+
+        paymentService.create(payment);
+
+        order.setPayment(payment);
+
+        order.setPaymentType(1);
 
         model.addAttribute("order", order);
 
