@@ -110,6 +110,8 @@ public class OrderController {
 
         order.setPaymentType(1);
 
+        orderService.update(order.getId(), order);
+
         model.addAttribute("order", order);
 
         return "cash";
