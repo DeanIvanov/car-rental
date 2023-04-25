@@ -35,4 +35,6 @@ public interface OrderService {
 
     Order getLatestOrder();
 
+    double calculateTotalPrice(Order order);
+
 }

@@ -9,6 +9,7 @@ import com.example.carrental.services.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -106,6 +107,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getLatestOrder() {
         return orderRepository.findTopByOrderByIdDesc();
+    }
+
+    @Override
+    public double calculateTotalPrice(Order order) {
+        long totalDays = Math.abs(ChronoUnit.DAYS.between(order.getStartDate(),order.getEndDate())) + 1;
+        double calculatedPrice = order.getCar().getPrice() * totalDays;
+        return calculatedPrice;
     }
 
 }

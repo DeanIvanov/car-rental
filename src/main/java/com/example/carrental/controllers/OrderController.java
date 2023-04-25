@@ -72,6 +72,8 @@ public class OrderController {
 
         order.setCar(car);
 
+        System.out.println(orderService.calculateTotalPrice(order));
+
         orderService.update(order.getId(), order);
 
         return "redirect:/select-payment";
@@ -80,6 +82,11 @@ public class OrderController {
     @GetMapping(value = "select-payment")
     public String paymentSelect() {
 
+        Order order = orderService.getLatestOrder();
+
+        order.setPrice(orderService.calculateTotalPrice(order));
+
+        orderService.update(order.getId(), order);
 
         return "payment";
     }
@@ -92,7 +99,7 @@ public class OrderController {
         if(paymentType==1) {
             order.setPaymentType(1);
             orderService.update(order.getId(), order);
-            return "redirect:/success";
+            return "redirect:/cash";
         } else {
             order.setPaymentType(2);
             orderService.update(order.getId(), order);
@@ -100,8 +107,17 @@ public class OrderController {
         }
     }
 
+    @GetMapping(value = "cash")
+    public String cashCheckout(Model model) {
+
+        Order order = orderService.getLatestOrder();
+        model.addAttribute("order", order);
+
+        return "cash";
+    }
+
     @GetMapping(value = "checkout")
-    public String checkout(Model model) {
+    public String cardCheckout(Model model) {
 
         Order order = orderService.getLatestOrder();
         model.addAttribute("order", order);
@@ -110,13 +126,13 @@ public class OrderController {
     }
 
     @PostMapping(value = "/checkout")
-    public String checkout(@RequestParam("date") LocalDate date, @RequestParam("price") double price) {
+    public String cardCheckout() {
 
         Order order = orderService.getLatestOrder();
 
         Payment payment = new Payment();
-        payment.setDate(date);
-        payment.setPrice(price);
+        payment.setDate(LocalDate.now());
+        payment.setPrice(order.getPrice());
         payment.setCompleted(true);
 
         paymentService.create(payment);
