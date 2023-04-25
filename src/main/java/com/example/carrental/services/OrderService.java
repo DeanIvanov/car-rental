@@ -33,4 +33,6 @@ public interface OrderService {
 
     List<Order> getByDate(LocalDate start, LocalDate end);
 
+    Order getLatestOrder();
+
 }

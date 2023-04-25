@@ -142,6 +142,10 @@ public class CarServiceImpl implements CarService {
         return carRepository.findAllByAvailable(available);
     }
 
+    @Override
+    public List<Car> getAvailableForLocationId(boolean available, int id) {
+        return carRepository.findAllByAvailableAndLocationId(available, id);
+    }
 
 
     private String uploadFile(MultipartFile file) {

@@ -32,22 +32,22 @@ public class Payment {
     @NotNull
     private boolean completed;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 4, max = 20, message = "Name must be between 5 and 40 characters")
-    private String name;
-
-    @NotNull
-    @NotBlank
-    @Size(min = 16, max = 16, message = "Card number must be exactly 16 digits")
-    private String cardNumber;
-
-    @NotNull
-    @NotBlank
-    private String expiryDate;
-
-    @NotNull
-    private int cvc;
+//    @NotNull
+//    @NotBlank
+//    @Size(min = 4, max = 20, message = "Name must be between 5 and 40 characters")
+//    private String name;
+//
+//    @NotNull
+//    @NotBlank
+//    @Size(min = 16, max = 16, message = "Card number must be exactly 16 digits")
+//    private String cardNumber;
+//
+//    @NotNull
+//    @NotBlank
+//    private String expiryDate;
+//
+//    @NotNull
+//    private int cvc;
 
     public int getId() {
         return id;
@@ -81,36 +81,36 @@ public class Payment {
         this.completed = completed;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public int getCvc() {
-        return cvc;
-    }
-
-    public void setCvc(int cvc) {
-        this.cvc = cvc;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public String getCardNumber() {
+//        return cardNumber;
+//    }
+//
+//    public void setCardNumber(String cardNumber) {
+//        this.cardNumber = cardNumber;
+//    }
+//
+//    public String getExpiryDate() {
+//        return expiryDate;
+//    }
+//
+//    public void setExpiryDate(String expiryDate) {
+//        this.expiryDate = expiryDate;
+//    }
+//
+//    public int getCvc() {
+//        return cvc;
+//    }
+//
+//    public void setCvc(int cvc) {
+//        this.cvc = cvc;
+//    }
 
 }

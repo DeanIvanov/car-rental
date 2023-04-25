@@ -48,7 +48,7 @@ public class OrderController {
 
         orderService.create(order.getId(), order);
 
-        return "search";
+        return "redirect:/search-results";
     }
 
 }

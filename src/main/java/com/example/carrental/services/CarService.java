@@ -39,4 +39,6 @@ public interface CarService {
 
     List<Car> getByAvailability(boolean available);
 
+    List<Car> getAvailableForLocationId(boolean available, int id);
+
 }

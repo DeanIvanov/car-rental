@@ -27,4 +27,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     boolean existsByCompletedAndUserId(boolean completed, int id);
 
+    Order findTopByOrderByIdDesc();
+
 }

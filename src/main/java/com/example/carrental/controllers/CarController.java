@@ -3,6 +3,7 @@ package com.example.carrental.controllers;
 import com.example.carrental.models.Car;
 import com.example.carrental.services.CarService;
 import com.example.carrental.services.LocationService;
+import com.example.carrental.services.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,14 @@ public class CarController {
 
     private CarService carService;
     private LocationService locationService;
+    private OrderService orderService;
+
 
     @Autowired
-    public CarController(CarService carService, LocationService locationService) {
+    public CarController(CarService carService, LocationService locationService, OrderService orderService) {
         this.carService = carService;
         this.locationService = locationService;
+        this.orderService = orderService;
     }
 
     @GetMapping(value = "/car-register")
@@ -46,11 +50,12 @@ public class CarController {
         return "index";
     }
 
-    @GetMapping(value = "search")
+    @GetMapping(value = "search-results")
     public String showSearch(Model model){
-        List<Car> carList = carService.getByAvailability(true);
+        int locationId = orderService.getLatestOrder().getLocation().getId();
+        List<Car> carList = carService.getAvailableForLocationId(true, locationId);
         model.addAttribute("cars", carList);
-        return "search";
+        return "car-results";
     }
 
     private String uploadFile(MultipartFile file) {

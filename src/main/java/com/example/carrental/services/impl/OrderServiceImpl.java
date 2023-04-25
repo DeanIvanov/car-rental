@@ -25,9 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void create(int id, Order order) {
-        if(orderRepository.existsByCompletedAndUserId(false, order.getUser().getId())){
-            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getEmail()));
-        }
+//        if(orderRepository.existsByCompletedAndUserId(false, order.getUser().getId())){
+//            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getEmail()));
+//        }
         orderRepository.save(order);
     }
 
@@ -101,6 +101,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getByDate(LocalDate start, LocalDate end) {
         return orderRepository.findAllByStartDateBetweenOrEndDateBetween(start, end, start, end);
+    }
+
+    @Override
+    public Order getLatestOrder() {
+        return orderRepository.findTopByOrderByIdDesc();
     }
 
 }

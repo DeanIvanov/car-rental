@@ -30,4 +30,6 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     boolean existsByRegistrationNumber(String number);
 
+    List<Car> findAllByAvailableAndLocationId(boolean available, int id);
+
 }
