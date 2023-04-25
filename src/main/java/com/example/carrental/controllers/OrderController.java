@@ -81,7 +81,7 @@ public class OrderController {
     public String paymentSelect() {
 
 
-        return "payment-select";
+        return "payment";
     }
 
     @PostMapping(value = "/select-payment")
