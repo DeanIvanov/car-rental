@@ -7,9 +7,14 @@ import com.example.carrental.models.User;
 import com.example.carrental.services.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -30,6 +35,7 @@ public class OrderController {
 
     @PostMapping(value = "/search")
     public String newOrder(@Valid @ModelAttribute("order")Order order, @RequestParam("orderLocation") String locationName) {
+
         order.setLocation(locationService.getLocation(locationName).get(0));
 
         Car tempCar = carService.getById(1);
@@ -50,5 +56,83 @@ public class OrderController {
 
         return "redirect:/search-results";
     }
+
+    @GetMapping(value = "search-results")
+    public String showSearch(Model model){
+        int locationId = orderService.getLatestOrder().getLocation().getId();
+        List<Car> carList = carService.getAvailableForLocationId(true, locationId);
+        model.addAttribute("cars", carList);
+        return "car-results";
+    }
+
+    @PostMapping(value = "/select-car")
+    public String carSelect(@Valid @ModelAttribute("car")Car car) {
+
+        Order order = orderService.getLatestOrder();
+
+        order.setCar(car);
+
+        orderService.update(order.getId(), order);
+
+        return "redirect:/select-payment";
+    }
+
+    @GetMapping(value = "select-payment")
+    public String paymentSelect() {
+
+
+        return "payment-select";
+    }
+
+    @PostMapping(value = "/select-payment")
+    public String paymentSelect(@RequestParam("paymentType") int paymentType) {
+
+        Order order = orderService.getLatestOrder();
+
+        if(paymentType==1) {
+            order.setPaymentType(1);
+            orderService.update(order.getId(), order);
+            return "redirect:/success";
+        } else {
+            order.setPaymentType(2);
+            orderService.update(order.getId(), order);
+            return "redirect:/checkout";
+        }
+    }
+
+    @GetMapping(value = "checkout")
+    public String checkout(Model model) {
+
+        Order order = orderService.getLatestOrder();
+        model.addAttribute("order", order);
+
+        return "checkout";
+    }
+
+    @PostMapping(value = "/checkout")
+    public String checkout(@RequestParam("date") LocalDate date, @RequestParam("price") double price) {
+
+        Order order = orderService.getLatestOrder();
+
+        Payment payment = new Payment();
+        payment.setDate(date);
+        payment.setPrice(price);
+        payment.setCompleted(true);
+
+        paymentService.create(payment);
+
+        order.setPayment(payment);
+        orderService.update(order.getId(), order);
+
+        return "redirect:/success";
+    }
+
+    @GetMapping(value = "success")
+    public String confirmOrder() {
+
+
+        return "success";
+    }
+
 
 }

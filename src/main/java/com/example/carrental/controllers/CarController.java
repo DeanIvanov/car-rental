@@ -7,7 +7,6 @@ import com.example.carrental.services.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,21 +18,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class CarController {
 
     private CarService carService;
     private LocationService locationService;
-    private OrderService orderService;
 
 
     @Autowired
-    public CarController(CarService carService, LocationService locationService, OrderService orderService) {
+    public CarController(CarService carService, LocationService locationService) {
         this.carService = carService;
         this.locationService = locationService;
-        this.orderService = orderService;
     }
 
     @GetMapping(value = "/car-register")
@@ -48,14 +44,6 @@ public class CarController {
         car.setCarPicture(uploadFile(multipart));
         carService.create(car.getId(), car, multipart);
         return "index";
-    }
-
-    @GetMapping(value = "search-results")
-    public String showSearch(Model model){
-        int locationId = orderService.getLatestOrder().getLocation().getId();
-        List<Car> carList = carService.getAvailableForLocationId(true, locationId);
-        model.addAttribute("cars", carList);
-        return "car-results";
     }
 
     private String uploadFile(MultipartFile file) {
