@@ -66,9 +66,11 @@ public class OrderController {
     }
 
     @PostMapping(value = "/select-car")
-    public String carSelect(@Valid @ModelAttribute("car")Car car) {
+    public String carSelect(@RequestParam("car-id") int carId) {
 
         Order order = orderService.getLatestOrder();
+
+        Car car = carService.getById(carId);
 
         order.setCar(car);
 
