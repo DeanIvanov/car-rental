@@ -76,6 +76,9 @@
             <p><a th:text="${order.car.name} + ' ' + ${order.car.model}">Car 1</a> <span class="price" th:text="${order.car.price}">$15</span></p>
             <hr>
             <p>Total <span class="price" th:text="${order.price}" style="color:black"><b>$30</b></span></p>
+            <a href="/success">
+                <input type="button" value="confirm order" />
+            </a>
         </div>
     </div>
 </div>

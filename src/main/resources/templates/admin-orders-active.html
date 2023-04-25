@@ -3,7 +3,7 @@
 <title>Cars table</title>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/tables.css" rel="stylesheet">
+    <link href=".../static/css/tables.css" rel="stylesheet">
 </head>
 <body>
 <div>
@@ -21,11 +21,11 @@
     </tr>
     <tr th:each="order : ${orders}">
         <td class="id" th:text="${order.id}">id</td>
-        <td class="name" th:text="${user.email}">name</td>
-        <td class="model" th:text="${car.name} + ' ' + ${car.model}" >model</td>
+        <td class="name" th:text="${order.user.email}">email</td>
+        <td class="model" th:text="${order.car.name} + ' ' + ${order.car.model}" >model</td>
         <td class="start-date" th:text="${order.startDate}">start date</td>
         <td class="end-date" th:text="${order.endDate}">end date</td>
-        <td class="price" th:text="${car.price}">price</td>
+        <td class="price" th:text="${order.price}">price</td>
         <td class="completed" th:text="${order.completed}">completed</td>
     </tr>
 </table>
