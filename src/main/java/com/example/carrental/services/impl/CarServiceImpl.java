@@ -40,7 +40,7 @@ public class CarServiceImpl implements CarService {
             car.setCarPicture(carImage);
         }
 
-//        update(newCar.getId(), car, multipartFile);
+        car.setAvailable(true);
 
         carRepository.save(car);
     }

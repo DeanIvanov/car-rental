@@ -21,7 +21,6 @@ public class Location {
     private int id;
 
     @Column(name = "name")
-    @NotNull
     @NotBlank
     @Size(min = 2, max = 15, message = "Name must be between 2 and 15")
     private String name;

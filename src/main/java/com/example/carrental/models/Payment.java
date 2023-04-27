@@ -25,28 +25,23 @@ public class Payment {
     private LocalDate date;
 
     @Column(name = "price")
-    @NotNull
     private double price;
 
     @Column(name = "completed")
     @NotNull
     private boolean completed;
 
-//    @NotNull
 //    @NotBlank
 //    @Size(min = 4, max = 20, message = "Name must be between 5 and 40 characters")
 //    private String name;
 //
-//    @NotNull
 //    @NotBlank
 //    @Size(min = 16, max = 16, message = "Card number must be exactly 16 digits")
 //    private String cardNumber;
 //
-//    @NotNull
 //    @NotBlank
 //    private String expiryDate;
 //
-//    @NotNull
 //    private int cvc;
 
     public int getId() {

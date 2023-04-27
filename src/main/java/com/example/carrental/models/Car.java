@@ -23,27 +23,22 @@ public class Car {
     private int id;
 
     @Column(name = "type")
-    @NotNull
     private int type;
 
     @Column(name = "name")
-    @NotNull
     @Size(min = 2, max = 15, message = "Name must be between 2 and 15")
     private String name;
 
     @Column(name = "model")
-    @NotNull
     @Size(min = 4, max = 20, message = "Model must be between 4 and 20")
     private String model;
 
     @Column(name = "color")
-    @NotNull
     @NotBlank
     @Size(min = 3, max = 15, message = "Color must be between 3 and 15")
     private String color;
 
     @Column(name = "transmission")
-    @NotNull
     private String transmission;
 
     @JsonIgnore
@@ -52,15 +47,12 @@ public class Car {
     private Location location;
 
     @Column(name = "price")
-    @NotNull
     private double price;
 
     @Column(name = "seats")
-    @NotNull
     private int seats;
 
     @Column(name = "registration_number")
-    @NotNull
     @NotBlank
     @Size(min = 6, max = 8, message = "Registration number must be between 4 and 8 characters")
     private String registrationNumber;
@@ -190,7 +182,5 @@ public class Car {
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
     }
-
-
 
 }

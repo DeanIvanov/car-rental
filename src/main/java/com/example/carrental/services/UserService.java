@@ -14,20 +14,18 @@ public interface UserService {
 
     void delete(User user);
 
-    void block(User user);
+    void enable(User user);
 
     List<User> getAll();
 
-    User getByEmail(String email);
+    User getByUsername(String username);
 
     User getById(int id);
 
-//    User getCurrentUser();
+    User getCurrentUser();
 
     List<User> getUser(String search);
 
     List<Order> getOrder(User user);
-
-//    String encodePass(String password);
 
 }

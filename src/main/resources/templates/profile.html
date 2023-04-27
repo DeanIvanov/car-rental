@@ -122,45 +122,46 @@
               <img id="logo" src="images/cowboy Cut.png" width="100px" height="70px">
           </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="Sign-up nav-link" href="/register">Sign Up</a>
-            </li>
-			  <li class="nav-item">
-              <a class="Profile nav-link" href="/login">Log In</a>
-            </li>
-          </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="Profile nav-link" sec:authorize="isAuthenticated()" href="/logout">Log Out</a>
+                <li class="nav-item">
+                    <a class="admin nav-link" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">Admin</a>
+                </li>
+            </ul>
 </div>
       </div>
     </nav>
+ <div th:objects="${user}">
     <div class="container">
         <div class="box">
             <ul>
-                <li id="Name">Name</li>
-                <li id="DOB">Date Of Birth</li>
-                <li id="Address">Address</li>
+                <li id="ID" th:text="'User ID: ' + '#' + ${user.id}">ID</li>
+                <li id="Username" th:text="'Email Address: ' + ${user.username}">Email</li>
+                <li id="Phone" th:text="'Phone Number: ' + ${user.phone}">Phone</li>
             </ul>
         </div>
         <div class="About">
             <ul>
-                <h1>about</h1>
+                <h1>About</h1>
             </ul>
             <ul>
-                <h3>Email address</h3>
-                <li id="Email">Email adress</li>
+                <h3>Name and Surname:</h3>
+                <li id="Email" th:text="${user.name} + ' ' + ${user.surname}">Name Surname</li>
             </ul>
             <ul>
-                <h3>Telephone number</h3>
-                <li id="Telnum">TelNum</li>
+                <h3>Driver's license number:</h3>
+                <li id="Licensenum" th:text="${user.licenseNumber}">12345</li>
             </ul>
             <ul>
-                <h3>Driver's license number</h3>
-                <li id="Licensenum">12345</li>
+                <h3>Address:</h3>
+                <li id="Telnum" th:text="${user.address}">Address</li>
             </ul>
         </div>
     </div>
+ </div>
 </body>
 </html>

@@ -45,7 +45,6 @@ public class Order {
     private Location location;
 
     @Column(name = "payment_type")
-    @NotNull
     private int paymentType;
 
     @JsonIgnore
@@ -54,7 +53,6 @@ public class Order {
     private Payment payment;
 
     @Column(name = "price")
-    @NotNull
     private double price;
 
     @Column(name = "completed")
@@ -153,4 +151,5 @@ public class Order {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 }

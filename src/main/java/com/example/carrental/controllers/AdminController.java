@@ -7,6 +7,7 @@ import com.example.carrental.services.CarService;
 import com.example.carrental.services.OrderService;
 import com.example.carrental.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,14 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showAdmin() {
 
         return "admin";
     }
 
     @GetMapping("admin/cars")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showCars(Model model) {
 
         List<Car> carList = carService.getAll();
@@ -44,6 +47,7 @@ public class AdminController {
     }
 
     @GetMapping("admin/cars/available")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showAvailableCars(Model model) {
 
         List<Car> carList = carService.getByAvailability(true);
@@ -54,6 +58,7 @@ public class AdminController {
     }
 
     @GetMapping("admin/orders")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showOrders(Model model) {
 
         List<Order> orderList = orderService.getAll();
@@ -64,6 +69,7 @@ public class AdminController {
     }
 
     @GetMapping("admin/orders/active")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showActiveOrders(Model model) {
 
         List<Order> orderList = orderService.getActive();
@@ -74,6 +80,7 @@ public class AdminController {
     }
 
     @GetMapping("admin/users")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showUsers(Model model) {
 
         List<User> userList = userService.getAll();

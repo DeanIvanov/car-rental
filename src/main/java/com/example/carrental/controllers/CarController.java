@@ -6,6 +6,7 @@ import com.example.carrental.services.LocationService;
 import com.example.carrental.services.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,12 +34,14 @@ public class CarController {
     }
 
     @GetMapping(value = "/car-register")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showRegister(){
 
         return "add-car";
     }
 
     @PostMapping(value = "/car-register")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("locationName") String locationName,
                                @RequestParam("file") MultipartFile multipart) {
 

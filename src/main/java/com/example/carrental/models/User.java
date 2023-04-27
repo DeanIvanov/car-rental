@@ -23,21 +23,19 @@ public class User {
     private int id;
 
     @Column(name = "name")
-    @NotNull
     @NotBlank
     @Size(min = 2, max = 15, message = "Name must be between 2 and 15")
     private String name;
 
     @Column(name = "surname")
-    @NotNull
     @NotBlank
     @Size(min = 3, max = 20, message = "Surname must be between 3 and 20")
     private String surname;
 
+    @Column(name = "username")
     @NotNull
     @Size(min = 7, max = 50, message = "Email should be between 7 and 50")
-    @Column(name = "email")
-    private String email;
+    private String username;
 
     @Column(name = "password")
     @NotNull
@@ -49,7 +47,6 @@ public class User {
     private String phone;
 
     @Column(name = "address")
-    @NotNull
     @Size(min = 10, max = 100, message = "Password must be between 10 and 100")
     private String address;
 
@@ -58,17 +55,15 @@ public class User {
     private LocalDate dob;
 
     @Column(name = "license_number")
-    @NotNull
     @Size(min = 6, max = 8, message = "License number must be between 6 and 8")
     private String licenseNumber;
 
     @Column(name = "license_category")
-    @NotNull
     @Size(min = 1, max = 2, message = "License category must be between 1 and 2")
     private String licenseCategory;
 
-    @Column(name = "blocked")
-    private boolean blocked;
+    @Column(name = "enabled")
+    private boolean enabled;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -99,12 +94,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -155,12 +150,12 @@ public class User {
         this.licenseCategory = licenseCategory;
     }
 
-    public boolean isBlocked() {
-        return blocked;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<Order> getOrderList() {

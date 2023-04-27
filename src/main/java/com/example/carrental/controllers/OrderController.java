@@ -6,6 +6,7 @@ import com.example.carrental.models.Payment;
 import com.example.carrental.models.User;
 import com.example.carrental.services.*;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/search")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String newOrder(@Valid @ModelAttribute("order")Order order, @RequestParam("orderLocation") String locationName) {
 
         order.setLocation(locationService.getLocation(locationName).get(0));
@@ -59,6 +61,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "search-results")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String showSearch(Model model){
 
         int locationId = orderService.getLatestOrder().getLocation().getId();
@@ -70,6 +73,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/select-car")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String carSelect(@RequestParam("car-id") int carId) {
 
         Order order = orderService.getLatestOrder();
@@ -84,6 +88,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "select-payment")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String paymentSelect() {
 
         Order order = orderService.getLatestOrder();
@@ -96,6 +101,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "cash")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String cashCheckout(Model model) {
 
         Order order = orderService.getLatestOrder();
@@ -119,6 +125,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "checkout")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String cardCheckout(Model model) {
 
         Order order = orderService.getLatestOrder();
@@ -129,6 +136,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/checkout")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String cardCheckout() {
 
         Order order = orderService.getLatestOrder();
@@ -148,6 +156,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "success")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String confirmOrder() {
 
         Order order = orderService.getLatestOrder();

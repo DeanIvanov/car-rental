@@ -13,6 +13,13 @@ import com.example.carrental.services.UserService;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,15 +28,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-//    private PasswordEncoder passwordEncoder;
-//    private UserDetailsManager userDetailsManager;
+    private PasswordEncoder passwordEncoder;
+    private UserDetailsManager userDetailsManager;
 
-//    @Autowired
-//    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserDetailsManager userDetailsManager) {
-//        this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
-//        this.userDetailsManager = userDetailsManager;
-//    }
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserDetailsManager userDetailsManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.userDetailsManager = userDetailsManager;
+    }
 
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -38,23 +45,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(int id, User user) {
-        if(userRepository.existsByEmail(user.getEmail())) {
-            throw new DuplicateEntityException(String.format("User with this email %s already exists!",user.getEmail()));
+        if(userRepository.existsByUsername(user.getUsername())) {
+            throw new DuplicateEntityException(String.format("User with this email %s already exists!",user.getUsername()));
         }
 
-//        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-//        org.springframework.security.core.userdetails.User userDetails =
-//                new org.springframework.security.core.userdetails.User(
-//                        user.getEmail(),
-//                        passwordEncoder.encode(user.getPassword()),
-//                        authorities);
-//
-//        userDetailsManager.createUser(userDetails);
-//        User newUser = userRepository.getByEmail(user.getEmail());
-//
-//        update(newUser.getId(),user);
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+        org.springframework.security.core.userdetails.User userDetails =
+                new org.springframework.security.core.userdetails.User(
+                        user.getUsername(),
+                        passwordEncoder.encode(user.getPassword()),
+                        authorities);
 
-        userRepository.save(user);
+        userDetailsManager.createUser(userDetails);
+        User newUser = userRepository.getByUsername(user.getUsername());
+
+        update(newUser.getId(),user);
+
+//        userRepository.save(user);
 
     }
 
@@ -63,14 +70,14 @@ public class UserServiceImpl implements UserService {
         User newUser = userRepository.getById(id);
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setDob(user.getDob());
         newUser.setPhone(user.getPhone());
         newUser.setAddress(user.getAddress());
         newUser.setLicenseNumber(user.getLicenseNumber());
         newUser.setLicenseCategory(user.getLicenseCategory());
-        newUser.setBlocked(false);
+        newUser.setEnabled(true);
 
         validateUserInput(newUser);
         userRepository.save(newUser);
@@ -82,11 +89,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void block(User user) {
-        if(user.isBlocked()){
-            user.setBlocked(false);
+    public void enable(User user) {
+        if(user.isEnabled()){
+            user.setEnabled(true);
         } else {
-            user.setBlocked(true);
+            user.setEnabled(false);
         }
         userRepository.save(user);
     }
@@ -97,8 +104,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByEmail(String email) {
-        return userRepository.getByEmail(email);
+    public User getByUsername(String username) {
+        return userRepository.getByUsername(username);
     }
 
     @Override
@@ -106,27 +113,21 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(id);
     }
 
-//    @Override
-//    public User getCurrentUser() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String email = authentication.getName();
-//        return getByEmail(email);
-//    }
+    @Override
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return getByUsername(authentication.getName());
+    }
 
     @Override
     public List<User> getUser(String search) {
-        return userRepository.findAllByEmailLikeOrPhoneLikeOrNameLikeOrSurnameLike(search, search, search, search);
+        return userRepository.findAllByUsernameLikeOrPhoneLikeOrNameLikeOrSurnameLike(search, search, search, search);
     }
 
     @Override
     public List<Order> getOrder(User user) {
         return user.getOrderList();
     }
-
-//    @Override
-//    public String encodePass(String password) {
-//        return passwordEncoder.encode(password);
-//    }
 
 
     private void validateUserInput(User user) {

@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void create(int id, Order order) {
 //        if(orderRepository.existsByCompletedAndUserId(false, order.getUser().getId())){
-//            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getEmail()));
+//            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getUsername()));
 //        }
         orderRepository.save(order);
     }

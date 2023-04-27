@@ -11,15 +11,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User getById(int id);
 
-    User getByEmail(String email);
+    User getByUsername(String username);
 
-    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
 
     List<User> findAll();
 
-    List<User> findAllByEmailLikeOrPhoneLikeOrNameLikeOrSurnameLike(String email, String phone, String name, String surname);
+    List<User> findAllByUsernameLikeOrPhoneLikeOrNameLikeOrSurnameLike(String username, String phone, String name, String surname);
 
-    List<User> findAllByBlocked(boolean blocked);
+    List<User> findAllByEnabled(boolean enabled);
 
 
 
