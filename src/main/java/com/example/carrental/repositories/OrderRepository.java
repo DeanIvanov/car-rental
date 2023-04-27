@@ -29,4 +29,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     Order findTopByOrderByIdDesc();
 
+    Order findOrderByActiveAndUserId(boolean active, int id);
+
 }

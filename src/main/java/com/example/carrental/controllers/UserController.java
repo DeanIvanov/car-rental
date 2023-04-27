@@ -43,9 +43,9 @@ public class UserController {
 
         User user = userService.getCurrentUser();
 
-//        Order order = orderService.getActiveOrderForUser(user.getId());
+        Order order = orderService.getActiveOrderForUser(user.getId());
 
-//        model.addAttribute("order", order);
+        model.addAttribute("order", order);
 
         return "user-orders";
     }
@@ -54,12 +54,11 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public String userCar(Model model) {
 
-        User user = userService.getCurrentUser()
-                ;
-//        Order order = orderService.getActiveOrderForUser(user.getId());
-//        Car car = carService.getById(order.getCar().getId());
+        User user = userService.getCurrentUser();
+        Order order = orderService.getActiveOrderForUser(user.getId());
+        Car car = carService.getById(order.getCar().getId());
 
-//        model.addAttribute("car", car);
+        model.addAttribute("car", car);
 
         return "user-cars";
     }

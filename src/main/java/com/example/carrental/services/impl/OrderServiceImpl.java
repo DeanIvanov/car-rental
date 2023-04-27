@@ -116,4 +116,9 @@ public class OrderServiceImpl implements OrderService {
         return calculatedPrice;
     }
 
+    @Override
+    public Order getActiveOrderForUser(int id) {
+        return orderRepository.findOrderByActiveAndUserId(true, id);
+    }
+
 }

@@ -37,4 +37,6 @@ public interface OrderService {
 
     double calculateTotalPrice(Order order);
 
+    Order getActiveOrderForUser(int id);
+
 }
