@@ -21,7 +21,7 @@
     </tr>
     <tr th:each="order : ${orders}">
         <td class="id" th:text="${order.id}">id</td>
-        <td class="name" th:text="${user.email}">name</td>
+        <td class="name" th:text="${user.username}">name</td>
         <td class="model" th:text="${car.name} + ' ' + ${car.model}" >model</td>
         <td class="start-date" th:text="${order.startDate}">start date</td>
         <td class="end-date" th:text="${order.endDate}">end date</td>
