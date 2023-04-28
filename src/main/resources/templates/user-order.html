@@ -139,14 +139,14 @@
 </div>
       </div>
     </nav>
- <div th:objects="${cars}">
+ <div th:objects="${orders}">
     <div class="container">
         <div class="box">
             <ul>
-                <li id="startDate" th:text="car.order.startDate">start date</li>
-                <li id="endDate" th:text="car.order.endDate">end date</li>
-                <li id="price" th:text="car.order.price">price</li>
-                <li id="completed" th:text="car.order.completed">completed</li>
+                <li id="startDate" th:text="order.startDate">start date</li>
+                <li id="endDate" th:text="order.endDate">end date</li>
+                <li id="price" th:text="order.price">price</li>
+                <li id="completed" th:text="order.completed">completed</li>
             </ul>
         </div>
         <div class="About">
@@ -155,19 +155,19 @@
             </ul>
             <ul>
                 <h3>Name and Model:</h3>
-                <li id="name" th:text="${car.name} + ' ' + ${car.model}">Name model</li>
+                <li id="name" th:text="${order.car.name} + ' ' + ${order.car.model}">Name model</li>
             </ul>
             <ul>
                 <h3>color:</h3>
-                <li id="color" th:text="${car.color}">red</li>
+                <li id="color" th:text="${order.car.color}">red</li>
             </ul>
             <ul>
                 <h3>transmission:</h3>
-                <li id="transmission" th:text="${car.transmission}">transmission</li>
+                <li id="transmission" th:text="${order.car.transmission}">transmission</li>
             </ul>
             <ul>
                 <h3>registration number:</h3>
-                <li id="registrationNumber" th:text="${car.registrationNumber}">Registration Number</li>
+                <li id="registrationNumber" th:text="${order.car.registrationNumber}">Registration Number</li>
             </ul>
         </div>
     </div>

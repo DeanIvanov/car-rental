@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Access denied</title>
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand">
+            <img id="logo" src="images/cowboy Cut.png" width="100px" height="70px">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="admin nav-link" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">Admin Panel</a>
+                    <a class="admin nav-link" sec:authorize="hasRole('ROLE_USER')" href="/user">User Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1 id="accessDenied">Access denied</h1>
 </body>
 </html>

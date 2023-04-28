@@ -4228,6 +4228,10 @@ input[type="button"].btn-block {
 text-align: center;
 font-size: 8em;
 }
+#accessDenied{
+text-align: center;
+font-size: 8em;
+}
 #success{
 text-align: center;
 font-size: 8em;
