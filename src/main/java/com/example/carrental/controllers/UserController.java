@@ -43,25 +43,25 @@ public class UserController {
         return "profile";
     }
 
+//    @GetMapping("user/order")
+//    @PreAuthorize("hasRole('ROLE_USER')")
+//    public String userOrder(Model model) {
+//
+//        User user = userService.getCurrentUser();
+//
+//        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
+//
+//        if(order.isPresent()) {
+//            model.addAttribute("order", order);
+//            return "user-order";
+//        }
+//
+//        return "profile";
+//    }
+
     @GetMapping("user/order")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String userOrder(Model model) {
-
-        User user = userService.getCurrentUser();
-
-        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
-
-        if(order.isPresent()) {
-            model.addAttribute("order", order);
-            return "user-orders";
-        }
-
-        return "profile";
-    }
-
-    @GetMapping("user/car")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String userCar(Model model) {
 
         User user = userService.getCurrentUser();
         Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
@@ -70,7 +70,7 @@ public class UserController {
             Car car = carService.getById(order.get().getCar().getId());
             model.addAttribute("order", order);
             model.addAttribute("car", car);
-            return "user-cars";
+            return "user-order";
         }
 
         return "profile";
