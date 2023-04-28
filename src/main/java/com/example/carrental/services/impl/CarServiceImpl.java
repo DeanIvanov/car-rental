@@ -6,9 +6,7 @@ import com.example.carrental.models.Location;
 import com.example.carrental.repositories.CarRepository;
 import com.example.carrental.services.CarService;
 import com.example.carrental.services.LocationService;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -30,16 +28,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void create(int id, Car car, MultipartFile multipartFile) {
+    public void create(int id, Car car) {
         if(carRepository.existsByRegistrationNumber(car.getRegistrationNumber())){
             throw new DuplicateEntityException(String.format("Car with registration number %s already exists!", car.getRegistrationNumber()));
         }
-
-        if(!multipartFile.isEmpty()){
-            String carImage = uploadFile(multipartFile);
-            car.setCarPicture(carImage);
-        }
-
         car.setAvailable(true);
 
         carRepository.save(car);
@@ -60,7 +52,6 @@ public class CarServiceImpl implements CarService {
         newCar.setRegistrationNumber(car.getRegistrationNumber());
         newCar.setServiceDate(car.getServiceDate());
         newCar.setAvailable(car.isAvailable());
-        newCar.setCarPicture(car.getCarPicture());
 
         carRepository.save(newCar);
     }
@@ -143,34 +134,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAvailableForLocationId(boolean available, int id) {
         return carRepository.findAllByAvailableAndLocationId(available, id);
-    }
-
-
-    private String uploadFile(MultipartFile file) {
-        if(!file.isEmpty()){
-            try {
-                byte[] bytes = file.getBytes();
-                String rootPath = "C:\\uploads";
-                File dir = new File("C:/");
-                if(!dir.exists()){
-                    dir.mkdirs();
-                }
-                String name = String.valueOf("/uploads/"+new Date().getTime()) + ".jpg";
-                File serverFile = new File(dir.getAbsolutePath()
-                        +File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-
-                return name;
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        } else {
-            return "/uploads/car.jpg";
-        }
-        return null;
     }
 
 }

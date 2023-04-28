@@ -18,7 +18,6 @@ CREATE TABLE cars (
     price double(10,2)  NULL,
     seats int(5)  NULL,
     registration_number varchar(8)  NULL,
-    car_picture blob  NULL,
     service_date datetime  NULL,
     available bit  NOT NULL DEFAULT 1,
     CONSTRAINT cars_pk PRIMARY KEY (car_id)
@@ -130,8 +129,8 @@ INSERT INTO payments (payment_id, date, price, completed)
 VALUES (1, '1990-01-01 00:00:00', 0, true);
 
 INSERT INTO cars (car_id, type, name, model, color, location_id, transmission, price, seats,
-                               registration_number, car_picture, service_date, available)
-VALUES (1, 3, 'Temp', 'Temp', 'red', 1, 'Manual', 0, 1, '12345678', null, '1990-01-01 00:00:00', false);
+                               registration_number, service_date, available)
+VALUES (1, 3, 'Temp', 'Temp', 'red', 1, 'Manual', 0, 1, '12345678', '1990-01-01 00:00:00', false);
 
 INSERT INTO authorities (username, authority)
 VALUES ('admin@gmail.com', 'ROLE_ADMIN');

@@ -2,14 +2,13 @@ package com.example.carrental.services;
 
 import com.example.carrental.models.Car;
 import com.example.carrental.models.Location;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface CarService {
 
-    void create(int id, Car car, MultipartFile multipartFile);
+    void create(int id, Car car);
 
     void update(int id, Car car);
 

@@ -12,13 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Date;
 
 @Controller
 public class CarController {
@@ -42,42 +36,13 @@ public class CarController {
 
     @PostMapping(value = "/car-register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("locationName") String locationName,
-                               @RequestParam("file") MultipartFile multipart) {
+    public String registerUser(@Valid @ModelAttribute("car") Car car, @RequestParam("locationName") String locationName) {
 
         car.setLocation(locationService.getLocation(locationName).get(0));
-        car.setCarPicture(uploadFile(multipart));
 
-        carService.create(car.getId(), car, multipart);
+        carService.create(car.getId(), car);
 
         return "index";
-    }
-
-    private String uploadFile(MultipartFile file) {
-        if(!file.isEmpty()){
-            try {
-                byte[] bytes = file.getBytes();
-                String rootPath = "C:\\uploads";
-                File dir = new File("C:/");
-                if(!dir.exists()){
-                    dir.mkdirs();
-                }
-                String name = String.valueOf("/uploads/"+new Date().getTime()) + ".jpg";
-                File serverFile = new File(dir.getAbsolutePath()
-                        +File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-
-                return name;
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        } else {
-            return "/uploads/car.jpg";
-        }
-        return null;
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,7 +41,9 @@ public class SecurityConfig {
         return new UserInfoDetailService();
     }
 
-
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().requestMatchers("static/**");
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,8 +51,7 @@ public class SecurityConfig {
         String[] staticResources = {
                 "/css/**",
                 "/images/**",
-                "/fonts/**",
-                "/scripts/**",};
+                "/js/**"};
 
         http
                 .csrf().disable()
@@ -108,6 +110,7 @@ public class SecurityConfig {
 
         return (web) -> web.debug(securityDebug)
                 .ignoring()
-                .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
+                .requestMatchers("static/**");
+//                .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
     }
 }

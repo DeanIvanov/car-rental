@@ -57,9 +57,6 @@ public class Car {
     @Size(min = 6, max = 8, message = "Registration number must be between 4 and 8 characters")
     private String registrationNumber;
 
-    @Column(name = "car_picture")
-    private String carPicture;
-
     @Column(name = "service_date")
     @DateTimeFormat
     private LocalDate serviceDate;
@@ -149,14 +146,6 @@ public class Car {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
-    }
-
-    public String getCarPicture() {
-        return carPicture;
-    }
-
-    public void setCarPicture(String carPicture) {
-        this.carPicture = carPicture;
     }
 
     public LocalDate getServiceDate() {
