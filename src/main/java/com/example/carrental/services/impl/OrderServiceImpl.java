@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -117,8 +118,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getActiveOrderForUser(int id) {
+    public Optional<Order> getActiveOrderForUser(int id) {
         return orderRepository.findOrderByActiveAndUserId(true, id);
     }
+
 
 }

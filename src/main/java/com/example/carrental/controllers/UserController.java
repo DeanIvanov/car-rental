@@ -11,6 +11,10 @@ import com.example.carrental.models.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
+import java.util.Optional;
+
+import static java.util.Objects.isNull;
+
 @Controller
 public class UserController {
 
@@ -29,10 +33,12 @@ public class UserController {
     public String userPanel(Model model) {
 
         User user = userService.getCurrentUser();
-        Order order = orderService.getActiveOrderForUser(user.getId());
+        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
         model.addAttribute("user", user);
-        model.addAttribute("order", order);
+        if(order.isPresent()) {
+            model.addAttribute("order", order);
+        }
 
         return "profile";
     }
@@ -43,11 +49,14 @@ public class UserController {
 
         User user = userService.getCurrentUser();
 
-        Order order = orderService.getActiveOrderForUser(user.getId());
+        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
-        model.addAttribute("order", order);
+        if(order.isPresent()) {
+            model.addAttribute("order", order);
+            return "user-orders";
+        }
 
-        return "user-orders";
+        return "profile";
     }
 
     @GetMapping("user/car")
@@ -55,13 +64,16 @@ public class UserController {
     public String userCar(Model model) {
 
         User user = userService.getCurrentUser();
-        Order order = orderService.getActiveOrderForUser(user.getId());
-        Car car = carService.getById(order.getCar().getId());
+        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
-        model.addAttribute("car", car);
-        model.addAttribute("order", order);
+        if(order.isPresent()) {
+            Car car = carService.getById(order.get().getCar().getId());
+            model.addAttribute("order", order);
+            model.addAttribute("car", car);
+            return "user-cars";
+        }
 
-        return "user-cars";
+        return "profile";
     }
 
 }

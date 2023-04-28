@@ -5,6 +5,7 @@ import com.example.carrental.models.User;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -37,6 +38,6 @@ public interface OrderService {
 
     double calculateTotalPrice(Order order);
 
-    Order getActiveOrderForUser(int id);
+    Optional<Order> getActiveOrderForUser(int id);
 
 }
