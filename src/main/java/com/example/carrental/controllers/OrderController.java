@@ -109,7 +109,7 @@ public class OrderController {
         Payment payment = new Payment();
         payment.setDate(LocalDate.now());
         payment.setPrice(order.getPrice());
-        payment.setCompleted(true);
+        payment.setCompleted(false);
 
         paymentService.create(payment);
 
