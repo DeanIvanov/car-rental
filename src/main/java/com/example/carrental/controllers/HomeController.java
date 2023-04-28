@@ -26,7 +26,7 @@ public class HomeController {
         Authorities authorities = new Authorities();
         authorities.getAuthority().equals(authentication);
 
-        return "index";
+        return "redirect:/index";
     }
 
     @GetMapping(value = "/login")
