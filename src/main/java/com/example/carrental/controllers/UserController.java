@@ -51,9 +51,7 @@ public class UserController {
         Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
         if(order.isPresent()) {
-            Car car = carService.getById(order.get().getCar().getId());
             model.addAttribute("order", order);
-            model.addAttribute("car", car);
             return "user-order";
         }
 
