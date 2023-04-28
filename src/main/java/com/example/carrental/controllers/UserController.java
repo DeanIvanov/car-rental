@@ -36,9 +36,7 @@ public class UserController {
         Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
         model.addAttribute("user", user);
-        if(order.isPresent()) {
-            model.addAttribute("order", order);
-        }
+        model.addAttribute("order", order);
 
         return "profile";
     }

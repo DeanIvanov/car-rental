@@ -27,9 +27,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void create(int id, Order order) {
-//        if(orderRepository.existsByCompletedAndUserId(false, order.getUser().getId())){
-//            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getUsername()));
-//        }
+        if(orderRepository.existsByUserIdAndActiveAndCompleted(order.getUser().getId(), true, false)){
+            throw new DuplicateEntityException(String.format("Active order with user %s already exists!", order.getUser().getUsername()));
+        }
         orderRepository.save(order);
     }
 
@@ -75,11 +75,6 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getById(id);
     }
 
-//    @Override
-//    public List<Order> getByCurrentUser() {
-//        return orderRepository.findAllByUser(userService.getCurrentUser());
-//    }
-
     @Override
     public List<Order> getByUser(User user) {
         return orderRepository.findAllByUser(user);
@@ -121,7 +116,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> getActiveOrderForUser(int id) {
-        return orderRepository.findOrderByActiveAndUserId(true, id);
+        return orderRepository.findOrderByActiveAndCompletedAndUserId(true, false, id);
     }
 
 

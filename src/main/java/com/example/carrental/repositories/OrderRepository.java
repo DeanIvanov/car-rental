@@ -26,10 +26,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findAllByCarId(int id);
 
-    boolean existsByCompletedAndUserId(boolean completed, int id);
+    boolean existsByUserIdAndActiveAndCompleted(int id, boolean active, boolean completed);
 
     Order findTopByOrderByIdDesc();
 
-    Optional<Order> findOrderByActiveAndUserId(boolean active, int id);
+    Optional<Order> findOrderByActiveAndCompletedAndUserId(boolean active, boolean completed, int id);
 
 }

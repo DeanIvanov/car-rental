@@ -41,11 +41,12 @@ public class OrderController {
 
         order.setLocation(locationService.getLocation(locationName).get(0));
 
+
         Car tempCar = carService.getById(1);
-        User tempUser = userService.getById(1);
+        User user = userService.getCurrentUser();
         Payment tempPayment = paymentService.getById(1);
         order.setCar(tempCar);
-        order.setUser(tempUser);
+        order.setUser(user);
         order.setStartDate(order.getStartDate());
         order.setEndDate(order.getEndDate());
         order.setLocation(locationService.getLocation(locationName).get(0));

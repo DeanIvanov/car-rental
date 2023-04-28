@@ -167,14 +167,14 @@
         </div>
     </div>
  </div>
-<div th:objects="${user}">
-    <div class="container">
-        <div class="box">
-            <ul>
-                <h3><a href="/user-order">Active order</a></h3>
-            </ul>
-        </div>
-    </div>
-</div>
+ <div th:objects="${order}">
+     <div class="container">
+         <div th:if="${order.isPresent()}" class="box">
+             <ul>
+                 <h3><a href="/user/order">Active order</a></h3>
+             </ul>
+         </div>
+     </div>
+ </div>
 </body>
 </html>
