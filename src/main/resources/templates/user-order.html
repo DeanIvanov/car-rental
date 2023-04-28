@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin menus</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
 </head>
@@ -113,9 +113,10 @@
         .About h1{
             text-align: center;
         }
-        li{
-         background-color: #ffffff;
-        }
+        a {
+            color: inherit;
+            text-decoration: inherit;
+           }
     }
 </style>
 <body>
@@ -125,24 +126,51 @@
               <img id="logo" src="images/cowboy Cut.png" width="100px" height="70px">
           </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto"/>
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home</a>
-            </li>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="Profile nav-link" sec:authorize="isAuthenticated()" href="/logout">Log Out</a>
+                <li class="nav-item">
+                    <a class="admin nav-link" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">Admin</a>
+                </li>
+            </ul>
 </div>
       </div>
     </nav>
+ <div th:objects="${cars}">
     <div class="container">
         <div class="box">
             <ul>
-                <li id="users-btn"><a href="admin/users">Show users</a></li>
-                <li id="cars-btn"><a href="admin/cars"> Show all cars</a></li>
-                <li id="avail-cars-btn"><a href="admin/cars/available">Show all available cars</a></li>
-                <li id="ordersActive-btn"><a href="admin/orders/active">Show active orders</a></li>
-                <li id="addCars-btn"><a href="/car-register">Add a car</a></li>
-                <li id="addLocation-btn"><a href="/location-register">Add a location</a></li>
+                <li id="startDate" th:text="car.order.startDate">start date</li>
+                <li id="endDate" th:text="car.order.endDate">end date</li>
+                <li id="price" th:text="car.order.price">price</li>
+                <li id="completed" th:text="car.order.completed">completed</li>
+            </ul>
+        </div>
+        <div class="About">
+            <ul>
+                <h1>Current car</h1>
+            </ul>
+            <ul>
+                <h3>Name and Model:</h3>
+                <li id="name" th:text="${car.name} + ' ' + ${car.model}">Name model</li>
+            </ul>
+            <ul>
+                <h3>color:</h3>
+                <li id="color" th:text="${car.color}">red</li>
+            </ul>
+            <ul>
+                <h3>transmission:</h3>
+                <li id="transmission" th:text="${car.transmission}">transmission</li>
+            </ul>
+            <ul>
+                <h3>registration number:</h3>
+                <li id="registrationNumber" th:text="${car.registrationNumber}">Registration Number</li>
             </ul>
         </div>
     </div>
+ </div>
 </body>
 </html>

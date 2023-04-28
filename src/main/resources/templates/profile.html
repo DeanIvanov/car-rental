@@ -113,6 +113,10 @@
         .About h1{
             text-align: center;
         }
+        a {
+            color: inherit;
+            text-decoration: inherit;
+           }
     }
 </style>
 <body>
@@ -163,5 +167,14 @@
         </div>
     </div>
  </div>
+<div th:objects="${user}">
+    <div class="container">
+        <div class="box">
+            <ul>
+                <h3><a href="">Active order</a></h3>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

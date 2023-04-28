@@ -18,10 +18,7 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="Sign-up nav-link" href="/register">Sign Up</a>
-            </li>
-			  <li class="nav-item">
-              <a class="Profile nav-link" href="/login">Log In</a>
+                <a class="admin nav-link" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">Admin Panel</a>
             </li>
           </ul>
 </div>
@@ -35,8 +32,8 @@
 	 <label th:for="name"><b>Name</b></label>
     <input type="text" minlength="2" maxlength="15" placeholder="Enter Name" th:name="Name" th:id="Name" required>
 
-    <label th:for="phone"><b>Model</b></label>
-    <input type="text" minlength="10" maxlength="13" placeholder="Enter Model" th:name="phone" th:id="phone" required>
+    <label th:for="phone"><b>Phone</b></label>
+    <input type="text" minlength="10" maxlength="13" placeholder="Enter Phone number" th:name="phone" th:id="phone" required>
 
     <button type="submit" class="carAdd-btn">add location</button>
   </div>
