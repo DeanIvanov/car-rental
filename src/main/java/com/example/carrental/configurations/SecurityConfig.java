@@ -111,6 +111,5 @@ public class SecurityConfig {
         return (web) -> web.debug(securityDebug)
                 .ignoring()
                 .requestMatchers("static/**");
-//                .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
     }
 }
