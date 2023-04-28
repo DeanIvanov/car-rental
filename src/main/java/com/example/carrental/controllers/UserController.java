@@ -48,29 +48,11 @@ public class UserController {
     public String userOrder(Model model) {
 
         User user = userService.getCurrentUser();
-
         Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
 
         if(order.isPresent()) {
             model.addAttribute("order", order);
-            return "user-orders";
-        }
-
-        return "profile";
-    }
-
-    @GetMapping("user/car")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String userCar(Model model) {
-
-        User user = userService.getCurrentUser();
-        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
-
-        if(order.isPresent()) {
-            Car car = carService.getById(order.get().getCar().getId());
-            model.addAttribute("order", order);
-            model.addAttribute("car", car);
-            return "user-cars";
+            return "user-order";
         }
 
         return "profile";
