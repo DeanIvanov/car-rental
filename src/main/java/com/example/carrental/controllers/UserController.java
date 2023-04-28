@@ -43,22 +43,6 @@ public class UserController {
         return "profile";
     }
 
-//    @GetMapping("user/order")
-//    @PreAuthorize("hasRole('ROLE_USER')")
-//    public String userOrder(Model model) {
-//
-//        User user = userService.getCurrentUser();
-//
-//        Optional<Order> order = orderService.getActiveOrderForUser(user.getId());
-//
-//        if(order.isPresent()) {
-//            model.addAttribute("order", order);
-//            return "user-order";
-//        }
-//
-//        return "profile";
-//    }
-
     @GetMapping("user/order")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String userOrder(Model model) {
