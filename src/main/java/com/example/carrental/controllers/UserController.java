@@ -29,10 +29,10 @@ public class UserController {
     public String userPanel(Model model) {
 
         User user = userService.getCurrentUser();
-//        Order order = orderService.getActiveOrderForUser(user.getId());
+        Order order = orderService.getActiveOrderForUser(user.getId());
 
         model.addAttribute("user", user);
-//        model.addAttribute("order", order);
+        model.addAttribute("order", order);
 
         return "profile";
     }
@@ -59,6 +59,7 @@ public class UserController {
         Car car = carService.getById(order.getCar().getId());
 
         model.addAttribute("car", car);
+        model.addAttribute("order", order);
 
         return "user-cars";
     }
