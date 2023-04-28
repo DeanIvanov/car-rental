@@ -111,18 +111,13 @@ INSERT INTO locations (location_id, name, phone)
 VALUES (3, 'Varna', '0885123465');
 
 INSERT INTO users (user_id, name, surname, username, password, phone, address, dob, license_number,
-                                license_category, enabled)
-VALUES (1, 'temp', 'temp', 'temp@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'Temp Address', '1990-01-01 00:00:00',
-        '12345678', 'B1', false);
-
-INSERT INTO users (user_id, name, surname, username, password, phone, address, dob, license_number,
                    license_category, enabled)
-VALUES (2, 'admin', 'adminov', 'admin@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'Admin Headquarters', '1990-01-01 00:00:00',
+VALUES (1, 'admin', 'adminov', 'admin@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'Admin Headquarters', '1990-01-01 00:00:00',
         '12345678', 'B1', true);
 
 INSERT INTO users (user_id, name, surname, username, password, phone, address, dob, license_number,
                    license_category, enabled)
-VALUES (3, 'user', 'userov', 'user@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'User Headquarters', '1990-01-01 00:00:00',
+VALUES (2, 'user', 'userov', 'user@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'User Headquarters', '1990-01-01 00:00:00',
         '12345678', 'B1', true);
 
 INSERT INTO payments (payment_id, date, price, completed)
@@ -130,7 +125,7 @@ VALUES (1, '1990-01-01 00:00:00', 0, true);
 
 INSERT INTO cars (car_id, type, name, model, color, location_id, transmission, price, seats,
                                registration_number, service_date, available)
-VALUES (1, 3, 'Temp', 'Temp', 'red', 1, 'Manual', 0, 1, '12345678', '1990-01-01 00:00:00', false);
+VALUES (1, 3, 'Car', 'Temp', 'red', 1, 'Manual', 0, 1, '12345678', '1990-01-01 00:00:00', false);
 
 INSERT INTO authorities (username, authority)
 VALUES ('admin@gmail.com', 'ROLE_ADMIN');
