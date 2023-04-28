@@ -113,11 +113,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public double calculateTotalPrice(Order order) {
         long totalDays = Math.abs(ChronoUnit.DAYS.between(order.getStartDate(),order.getEndDate()));
-        double calculatedPrice = order.getCar().getPrice() * totalDays;
-        if (calculatedPrice < 1) {
-            calculatedPrice = 1;
+        if (totalDays < 1) {
+            totalDays = 1;
         }
-        return calculatedPrice;
+        return order.getCar().getPrice() * totalDays;
     }
 
     @Override
