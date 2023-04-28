@@ -114,6 +114,9 @@ public class OrderServiceImpl implements OrderService {
     public double calculateTotalPrice(Order order) {
         long totalDays = Math.abs(ChronoUnit.DAYS.between(order.getStartDate(),order.getEndDate()));
         double calculatedPrice = order.getCar().getPrice() * totalDays;
+        if (calculatedPrice < 1) {
+            calculatedPrice = 1;
+        }
         return calculatedPrice;
     }
 
