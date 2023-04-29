@@ -34,6 +34,16 @@ public class LocationServiceTests {
 
     }
 
+    @Test
+    public void createLocationTest(){
+
+        Location location = new Location();
+
+        locationService.create(location);
+
+        verify(locationRepository,times(1)).save(location);
+
+    }
 
 
 

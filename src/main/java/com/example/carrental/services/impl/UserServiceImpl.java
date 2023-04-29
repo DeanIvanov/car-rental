@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService {
         this.userDetailsManager = userDetailsManager;
     }
 
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     @Override
     public void create(int id, User user) {
         if(userRepository.existsByUsername(user.getUsername())) {
@@ -53,9 +48,6 @@ public class UserServiceImpl implements UserService {
         User newUser = userRepository.getByUsername(user.getUsername());
 
         update(newUser.getId(),user);
-
-//        userRepository.save(user);
-
     }
 
     @Override

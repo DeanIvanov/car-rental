@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -69,6 +70,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orderList;
 
+    public User() {
+        this.orderList = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
