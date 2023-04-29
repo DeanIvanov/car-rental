@@ -1,19 +1,16 @@
 package com.example.carrental.controllers;
 
-import com.example.carrental.models.Car;
 import com.example.carrental.models.Order;
+import com.example.carrental.models.User;
 import com.example.carrental.services.CarService;
 import com.example.carrental.services.OrderService;
+import com.example.carrental.services.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import com.example.carrental.services.UserService;
-import com.example.carrental.models.User;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
-
-import static java.util.Objects.isNull;
 
 @Controller
 public class UserController {

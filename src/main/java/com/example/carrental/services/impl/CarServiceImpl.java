@@ -8,12 +8,7 @@ import com.example.carrental.services.CarService;
 import com.example.carrental.services.LocationService;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
