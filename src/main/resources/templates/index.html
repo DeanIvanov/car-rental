@@ -25,6 +25,7 @@
         <li class="nav-item">
           <a class="Profile nav-link" sec:authorize="!isAuthenticated()" href="/login">Log In</a>
           <a class="Profile nav-link" sec:authorize="isAuthenticated()" href="/logout">Log Out</a>
+        </li>
         <li class="nav-item">
           <a class="admin nav-link" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">Admin Panel</a>
           <a class="admin nav-link" sec:authorize="hasRole('ROLE_USER')" href="/user">User Profile</a>
@@ -78,7 +79,7 @@
       <div class="col-lg-2">
         <div class="Starting-Locations form-group">
           <label th:for="orderLocation">Pick up Location:</label>
-          <select class="Starting-Locations form-control" th:name="orderLocation" th:id="orderLocation">
+          <select class="Starting-Locations form-control" th:name="orderLocation" th:id="orderLocation" required>
             <option disabled selected value> select a Location </option>
             <option value="Ruse">Ruse</option>
             <option value="Varna">Varna</option>
@@ -89,13 +90,13 @@
       <div class="col-lg-4 pl-lg-1">
         <div class="form-group">
           <label th:for="startDate">Pick up date:</label>
-          <input type="date" class="Starting-Date form-control" th:name="startDate" th:id="startDate">
+          <input type="date" class="Starting-Date form-control" th:name="startDate" th:id="startDate" required>
         </div>
       </div>
       <div class="col-lg pl-lg-1">
         <div class="form-group">
           <label th:for="endDate">Drop-off date:</label>
-          <input type="date" class="DropOff-Date form-control" th:name="endDate" th:id="endDate">
+          <input type="date" class="DropOff-Date form-control" th:name="endDate" th:id="endDate" required>
         </div>
       </div>
       <div class="col-lg-auto pl-lg-1">
@@ -159,7 +160,7 @@
       </address>
       <address>
         <strong>Cowboy 1</strong><br>
-        <a href="mailto:#">216300@stud.uni-ruse.bg</a>
+        <a href="mailto:#">216300@stud.uni-ruse.bg</a><br>
         <strong>Cowboy 2</strong><br>
         <a href="mailto:#">216301@stud.uni-ruse.bg</a>
       </address>
@@ -170,7 +171,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <p>Copyright © MyWebsite. All rights reserved.</p>
+        <p>Copyright © Cowboy Imports Inc. All rights reserved.</p>
       </div>
     </div>
   </div>
