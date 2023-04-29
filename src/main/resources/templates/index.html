@@ -81,9 +81,7 @@
           <label th:for="orderLocation">Pick up Location:</label>
           <select class="Starting-Locations form-control" th:name="orderLocation" th:id="orderLocation" required>
             <option disabled selected value> select a Location </option>
-            <option value="Ruse">Ruse</option>
-            <option value="Varna">Varna</option>
-            <option value="Sofia">Sofia</option>
+            <option th:each="location : ${locations}" th:value="${location.name}" th:text="${location.name}">Location Name</option>
           </select>
         </div>
       </div>
