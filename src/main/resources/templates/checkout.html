@@ -70,9 +70,9 @@
           <b>1</b>
         </span>
             </h4>
-            <p><a th:text="${order.car.name} + ' ' + ${order.car.model}">Car 1</a> <span class="price" th:text="${order.car.price}">$15</span></p>
+            <p><a th:text="${order.car.name} + ' ' + ${order.car.model}">Car 1</a> <span class="price" th:text="${order.car.price} + ' ' + 'lv.'">$15</span></p>
             <hr>
-            <p>Total <span class="price" th:text="${order.price}" style="color:black"><b>$30</b></span></p>
+            <p>Total <span class="price" th:text="${order.price} + ' ' + 'lv.'" style="color:black"><b>$30</b></span></p>
         </div>
     </div>
 </div>

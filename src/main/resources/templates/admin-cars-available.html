@@ -50,7 +50,7 @@
         <td class="name" th:text="${car.name}">name</td>
         <td class="model" th:text="${car.model}">model</td>
         <td class="reg-number" th:text="${car.registrationNumber}">regnum</td>
-        <td class="price" th:text="${car.price}">price</td>
+        <td class="price" th:text="${car.price} + ' ' + 'lv.'">price</td>
         <td class="available" th:text="${car.available}">available</td>
     </tr>
 </table>

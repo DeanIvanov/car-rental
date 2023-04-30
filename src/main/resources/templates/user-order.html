@@ -146,7 +146,7 @@
              <ul>
                  <li id="startDate" th:text="'Start date: ' + ${order.get().startDate}">start date</li>
                  <li id="endDate" th:text="'End date: ' + ${order.get().endDate}">end date</li>
-                 <li id="price" th:text="'Price: ' + ${order.get().price}">price</li>
+                 <li id="price" th:text="'Price: ' + ${order.get().price} + ' ' + 'lv.'">price</li>
                  <li id="completed" th:text="'Completion status: ' + ${order.get().completed}">completed</li>
              </ul>
          </div>
