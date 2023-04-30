@@ -1,5 +1,6 @@
 package com.example.carrental.services;
 
+import com.example.carrental.exceptions.DuplicateEntityException;
 import com.example.carrental.exceptions.InvalidUserInputException;
 import com.example.carrental.models.Order;
 import com.example.carrental.models.User;
@@ -41,6 +42,18 @@ public class UserServiceTests {
     @InjectMocks
     UserServiceImpl userService;
 
+    @Test(expected = DuplicateEntityException.class)
+    public void createUserShouldThrowExceptionWhenUserAlreadyExistsTest(){
+
+        User user = new User();
+        user.setUsername("test@gmail.com");
+
+        when(userRepository.existsByUsername(user.getUsername())).thenReturn(true);
+        userService.create(user.getId(), user);
+
+        verify(userRepository, times(1)).save(user);
+
+    }
 
     @Test
     public void updateUserTest(){

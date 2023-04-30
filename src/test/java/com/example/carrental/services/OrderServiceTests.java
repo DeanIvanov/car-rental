@@ -1,5 +1,6 @@
 package com.example.carrental.services;
 
+import com.example.carrental.exceptions.DuplicateEntityException;
 import com.example.carrental.models.*;
 import com.example.carrental.repositories.OrderRepository;
 import com.example.carrental.repositories.UserRepository;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -84,6 +86,21 @@ public class OrderServiceTests {
 
 
     }
+
+    @Test(expected = DuplicateEntityException.class)
+    public void createOrderShouldThrowExceptionWhenUserAlreadyHasActiveOrderExistsTest(){
+
+        Order order = new Order();
+        User user = new User();
+        order.setUser(user);
+
+        when(orderRepository.existsByUserIdAndActiveAndCompleted(user.getId(),true, false)).thenReturn(true);
+        orderService.create(order.getId(), order);
+
+        verify(orderRepository, times(1)).save(order);
+
+    }
+
     @Test
     public void SetCompleteOrderTest(){
         Order order = new Order();
@@ -231,39 +248,52 @@ public class OrderServiceTests {
         verify(orderRepository,times(1)).findTopByOrderByIdDesc();
 
     }
-//    @Test
-//    public void calculateTotalPriceTest(){
-//
-//        Order order = new Order();
-//        order.setStartDate(LocalDate.of(2023,12,1));
-//        order.setEndDate(LocalDate.of(2023,12,2));
-//        Car car = new Car();
-//        car.setPrice(5);
-//
-//        when(orderRepository.findAll()).thenReturn(order);
-//        Order retrievedUser = orderService.getLatestOrder();
-//
-//        Assert.assertEquals(order, retrievedUser);
-//        verify(orderRepository,times(1)).findTopByOrderByIdDesc();
-//
-//    }
-//    @Test
-//    public void getActiveForUserOrderTest(){
-//
-//        Order order = new Order();
-//        User user = new User();
-//        order.setUser(user);
-//        order.setActive(true);
-//        order.setCompleted(false);
-//        List<Order> OrderList = new ArrayList<>();
-//        OrderList.add(order);
-//
-//        when(orderRepository.findOrderByActiveAndCompletedAndUserId(true,false, user.getId())).thenReturn(order);
-//        orderService.getActive();
-//
-//
-//        Assert.assertEquals(1, OrderList.size());
-//        verify(orderRepository,times(1)).findOrderByActiveAndCompletedAndUserId(true,false, user.getId());
-//
-//    }
+    @Test
+    public void calculateTotalPriceWhenDurationIsMoreThanOneDayTest(){
+
+        Order order = new Order();
+        order.setStartDate(LocalDate.of(2023,12,1));
+        order.setEndDate(LocalDate.of(2023,12,2));
+        Car car = new Car();
+        car.setPrice(5);
+        order.setCar(car);
+
+        double totalPrice = orderService.calculateTotalPrice(order);
+        Assert.assertEquals(5, totalPrice, 0);
+
+    }
+
+    @Test
+    public void calculateTotalPriceWhenDurationIsLessThanOneDayTest(){
+
+        Order order = new Order();
+        order.setStartDate(LocalDate.now());
+        order.setEndDate(LocalDate.now());
+        Car car = new Car();
+        car.setPrice(5);
+        order.setCar(car);
+
+        double totalPrice = orderService.calculateTotalPrice(order);
+        Assert.assertEquals(5, totalPrice, 0);
+
+    }
+
+    @Test
+    public void getActiveForUserOrderTest(){
+
+        Order order = new Order();
+        User user = new User();
+        order.setUser(user);
+        order.setActive(true);
+        order.setCompleted(false);
+        Optional<Order> orderList = Optional.of(order);
+
+        when(orderRepository.findOrderByActiveAndCompletedAndUserId(true,false, order.getUser().getId())).thenReturn(orderList);
+        Order retrievedOrder = orderService.getActiveOrderForUser(order.getUser().getId()).get();
+
+        Assert.assertEquals(order, retrievedOrder);
+        verify(orderRepository,times(1)).findOrderByActiveAndCompletedAndUserId(true,false, user.getId());
+
+    }
+
 }

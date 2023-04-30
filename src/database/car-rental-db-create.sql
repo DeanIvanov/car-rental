@@ -1,3 +1,5 @@
+use `car-rental`;
+
 -- tables
 
 -- Table: authorities
@@ -100,7 +102,7 @@ ALTER TABLE orders ADD CONSTRAINT orders_payments FOREIGN KEY orders_payments (p
 ALTER TABLE orders ADD CONSTRAINT orders_users FOREIGN KEY orders_users (user_id)
     REFERENCES users (user_id);
 
--- Temps added
+-- Baseline data added
 INSERT INTO locations (location_id, name, phone)
 VALUES (1, 'Sofia', '0885123456');
 
@@ -112,12 +114,12 @@ VALUES (3, 'Varna', '0885123465');
 
 INSERT INTO users (user_id, name, surname, username, password, phone, address, dob, license_number,
                    license_category, enabled)
-VALUES (1, 'admin', 'adminov', 'admin@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'Admin Headquarters', '1990-01-01 00:00:00',
+VALUES (1, 'admin', 'adminov', 'admin@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0885123456', 'Admin Headquarters', '1990-01-01 00:00:00',
         '12345678', 'B1', true);
 
 INSERT INTO users (user_id, name, surname, username, password, phone, address, dob, license_number,
                    license_category, enabled)
-VALUES (2, 'user', 'userov', 'user@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0123456789', 'User Headquarters', '1990-01-01 00:00:00',
+VALUES (2, 'user', 'userov', 'user@gmail.com', '$2a$10$w6VAEGILgYJUTctlSRg2zeVvBDEl5N/68L3BPhl6gZJ36BbCT9FO6', '0885123456', 'User Headquarters', '1990-01-01 00:00:00',
         '12345678', 'B1', true);
 
 INSERT INTO payments (payment_id, date, price, completed)
