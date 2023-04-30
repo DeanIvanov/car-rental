@@ -97,6 +97,10 @@ public class PaymentServiceTests {
 
     @Test
     public void SetCompleteTest(){
+        Payment payment = new Payment();
+        payment.setCompleted(false);
 
+        paymentService.complete(payment);
+        verify(paymentRepository,times(1)).save(payment);
     }
 }
