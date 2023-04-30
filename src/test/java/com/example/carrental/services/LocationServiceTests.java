@@ -66,15 +66,18 @@ public class LocationServiceTests {
 
     }
 
-//    @Test(expected = DuplicateEntityException.class)
-//    public void createLocationDuplicateTest(){
-//        Location location = new Location();
-//        location.setName("test");
-//        location.setPhone("0885123465");
-//        Location location2 = new Location();
-//        location2.setName("test");
-//        location2.setPhone("0885123465");
-//    }
+    @Test(expected = DuplicateEntityException.class)
+    public void createLocationShouldThrowExceptionWhenLocationAlreadyExistsTest(){
+
+        Location location = new Location();
+        location.setName("test");
+
+        when(locationRepository.existsByName(location.getName())).thenReturn(true);
+        locationService.create(location);
+
+        verify(locationRepository, times(1)).save(location);
+
+    }
 
     @Test
     public void getAllLocationsTest(){

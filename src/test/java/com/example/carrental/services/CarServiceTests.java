@@ -1,14 +1,12 @@
 package com.example.carrental.services;
 
+import com.example.carrental.exceptions.DuplicateEntityException;
 import com.example.carrental.models.Car;
 import com.example.carrental.models.Location;
-import com.example.carrental.models.User;
 import com.example.carrental.repositories.CarRepository;
 import com.example.carrental.repositories.LocationRepository;
-import com.example.carrental.repositories.PaymentRepository;
 import com.example.carrental.services.impl.CarServiceImpl;
 import com.example.carrental.services.impl.LocationServiceImpl;
-import com.example.carrental.services.impl.PaymentServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +53,19 @@ public class CarServiceTests {
         Car car = new Car();
 
         carService.create(1, car);
+
+        verify(carRepository, times(1)).save(car);
+
+    }
+
+    @Test(expected = DuplicateEntityException.class)
+    public void createCarShouldThrowExceptionWhenRegistrationNumberAlreadyExistsTest(){
+
+        Car car = new Car();
+        car.setRegistrationNumber("12345678");
+
+        when(carRepository.existsByRegistrationNumber(car.getRegistrationNumber())).thenReturn(true);
+        carService.create(car.getId(), car);
 
         verify(carRepository, times(1)).save(car);
 
@@ -142,7 +153,7 @@ public class CarServiceTests {
         verify(carRepository, times(1)).findAllByColor("blue");
     }
     @Test
-    public void getByT0ransmissionCarTest() {
+    public void getByTransmissionCarTest() {
         Car car = new Car();
         car.setTransmission("manual");
         List<Car> CarList = new ArrayList<>();
@@ -185,21 +196,24 @@ public class CarServiceTests {
         verify(carRepository, times(1)).findAllBySeatsBetween(4,6);
     }
 
-//    @Test
-//    public void getByLocationCarTest() {
-//        Car car = new Car();
-//        Location location = new Location();
-//        car.setLocation(location);
-//        List<Car> CarList = new ArrayList<>();
-//        CarList.add(car);
-//
-//        when(carRepository.findAllByLocation(location)).thenReturn(CarList);
-//        carService.getByLocation(location.getName());
-//
-//
-//        Assert.assertEquals(1, CarList.size());
-//        verify(carRepository, times(1)).findAllByLocation(location);
-//    }
+    @Test
+    public void getByLocationCarTest() {
+        Car car = new Car();
+        Location location = new Location();
+        car.setLocation(location);
+        List<Car> carList = new ArrayList<>();
+        carList.add(car);
+        List<Location> locationList = new ArrayList<>();
+        locationList.add(location);
+
+        when(locationRepository.findAllByPhoneLikeOrNameLike(location.getName(),location.getName())).thenReturn(locationList);
+        when(carRepository.findAllByLocation(locationList.get(0))).thenReturn(carList);
+        carService.getByLocation(location.getName());
+
+        Assert.assertEquals(1,carList.size());
+        verify(carRepository, times(1)).findAllByLocation(locationList.get(0));
+    }
+
 @Test
 public void getByAvailabilityCarTest() {
     Car car = new Car();
@@ -228,5 +242,55 @@ public void getByAvailabilityCarTest() {
         Assert.assertEquals(1, CarList.size());
         verify(carRepository, times(1)).findAllByAvailableAndLocationId(true, location.getId());
     }
+
+    @Test
+    public void changeCarAvailabilityIfUnavailableTest() {
+
+        Car car = new Car();
+        car.setAvailable(false);
+
+        carService.changeAvailability(car);
+        verify(carRepository,times(1)).save(car);
+    }
+
+    @Test
+    public void changeCarAvailabilityIfAvailableTest() {
+
+        Car car = new Car();
+        car.setAvailable(true);
+
+        carService.changeAvailability(car);
+        verify(carRepository,times(1)).save(car);
+    }
+
+    @Test
+    public void changeCarLocationTest(){
+
+        Car car = new Car();
+        Location location = new Location();
+        car.setLocation(location);
+        Location newLocation = new Location();
+
+        when(carRepository.getById(car.getId())).thenReturn(car);
+        carService.changeLocation(newLocation, car);
+
+        verify(carRepository,times(1)).save(car);
+    }
+
+    @Test
+    public void changeCarServiceDateTest(){
+
+        Car car = new Car();
+        LocalDate date = LocalDate.now();
+        car.setServiceDate(date);
+        LocalDate newDate = LocalDate.now();
+
+        when(carRepository.getById(car.getId())).thenReturn(car);
+        carService.changeServiceDate(newDate, car);
+
+        verify(carRepository,times(1)).save(car);
+    }
+
+
 }
 

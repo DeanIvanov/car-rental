@@ -4,6 +4,7 @@ import com.example.carrental.exceptions.DuplicateEntityException;
 import com.example.carrental.models.Car;
 import com.example.carrental.models.Location;
 import com.example.carrental.repositories.CarRepository;
+import com.example.carrental.repositories.LocationRepository;
 import com.example.carrental.services.CarService;
 import com.example.carrental.services.LocationService;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,11 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
-    private LocationService locationService;
+    private LocationRepository locationRepository;
 
-    public CarServiceImpl(CarRepository carRepository, LocationService locationService) {
+    public CarServiceImpl(CarRepository carRepository, LocationRepository locationRepository) {
         this.carRepository = carRepository;
-        this.locationService = locationService;
+        this.locationRepository = locationRepository;
     }
 
     @Override
@@ -64,6 +65,7 @@ public class CarServiceImpl implements CarService {
             car.setAvailable(true);
         }
         carRepository.save(car);
+
     }
 
     @Override
@@ -117,7 +119,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getByLocation(String name) {
-        Location location = locationService.getLocation(name).get(0);
+        Location location = locationRepository.findAllByPhoneLikeOrNameLike(name, name).get(0);
         return carRepository.findAllByLocation(location);
     }
 
