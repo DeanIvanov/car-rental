@@ -1,6 +1,12 @@
-use `car-rental`;
+-- create database and database-specific user
 
--- tables
+DROP DATABASE IF EXISTS `car-rental`;
+CREATE DATABASE IF NOT EXISTS `car-rental`;
+USE `car-rental`;
+CREATE USER IF NOT EXISTS `super`@`%` IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON `car-rental`.* TO `super`@`%`;
+
+-- create all tables
 
 -- Table: authorities
 CREATE TABLE authorities (
@@ -76,7 +82,7 @@ CREATE TABLE users (
 );
 
 
--- foreign keys
+-- add all foreign keys
 
 -- Reference: authorities_users (table: authorities)
 ALTER TABLE authorities ADD CONSTRAINT authorities_users FOREIGN KEY authorities_users (username)
@@ -102,7 +108,7 @@ ALTER TABLE orders ADD CONSTRAINT orders_payments FOREIGN KEY orders_payments (p
 ALTER TABLE orders ADD CONSTRAINT orders_users FOREIGN KEY orders_users (user_id)
     REFERENCES users (user_id);
 
--- Baseline data added
+-- add baseline data
 INSERT INTO locations (location_id, name, phone)
 VALUES (1, 'Sofia', '0885123456');
 
