@@ -1,4 +1,4 @@
-# Cowboy imports - car rental website
+# Електронна система за наемане на автомобил (ЕСНА)
 
 Линк към Trello: [https://trello.com/b/rM7NYZwQ](https://trello.com/b/iBjcn2w8)
 
