@@ -41,7 +41,7 @@ public class CarController {
 
         carService.create(car.getId(), car);
 
-        return "index";
+        return "admin";
     }
 
 }

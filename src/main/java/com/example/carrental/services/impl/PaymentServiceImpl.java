@@ -16,11 +16,17 @@ public class PaymentServiceImpl implements PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
+    /*
+    * Saves the new payment to the database through the repository class.
+    * */
     @Override
     public void create(Payment payment) {
         paymentRepository.save(payment);
     }
 
+    /*
+    * Updates each property of a payment object and saves it in the database through the repository class.
+    * */
     @Override
     public void update(int id, Payment payment) {
         Payment newPayment = paymentRepository.getById(id);
@@ -28,6 +34,9 @@ public class PaymentServiceImpl implements PaymentService {
         paymentRepository.save(newPayment);
     }
 
+    /*
+    * Deletes a payment through the repository class.
+    * */
     @Override
     public void delete(Payment payment) {
         paymentRepository.delete(payment);
@@ -41,17 +50,26 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
+    /*
+    * Gets a single payment object by its ID from the database.
+    * */
     @Override
     public Payment getById(int id) {
         return paymentRepository.getById(id);
     }
 
+    /*
+    * Gets a list of all payment objects from the database.
+    * */
     @Override
     public List<Payment> getAll() {
         return paymentRepository.findAll();
     }
 
 
+    /*
+    * API simulation of payment
+    * */
 //    @Override
 //    public HttpStatus sendRequestApi(Card card, User user, double amount, String description){
 //        final String url = "http://localhost:8081/payment";

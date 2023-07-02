@@ -31,6 +31,10 @@ public class UserServiceImpl implements UserService {
         this.userDetailsManager = userDetailsManager;
     }
 
+    /*
+    * Checks if user email already exists in the database, adds their user authority level and saves the new user
+    * to the database through the repository class.
+    * */
     @Override
     public void create(int id, User user) {
         if(userRepository.existsByUsername(user.getUsername())) {
@@ -50,6 +54,9 @@ public class UserServiceImpl implements UserService {
         update(newUser.getId(),user);
     }
 
+    /*
+    * Updates each property of a user object and saves it in the database through the repository class.
+    * */
     @Override
     public void update(int id, User user) {
         User newUser = userRepository.getById(id);
@@ -68,11 +75,17 @@ public class UserServiceImpl implements UserService {
         userRepository.save(newUser);
     }
 
+    /*
+    * Deletes a user through the repository class.
+    * */
     @Override
     public void delete(User user) {
         userRepository.delete(user);
     }
 
+    /*
+    * Flips the enabled status of a user in the database.
+    * */
     @Override
     public void enable(User user) {
         if(user.isEnabled()){
@@ -83,38 +96,60 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    /*
+    * Gets a list of all user objects from the database.
+    * */
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
+    /*
+    * Gets a single user object by its email address from the database.
+    * */
     @Override
     public User getByUsername(String username) {
         return userRepository.getByUsername(username);
     }
 
+    /*
+    * Gets a single user object by its ID from the database.
+    * */
     @Override
     public User getById(int id) {
         return userRepository.getById(id);
     }
 
+    /*
+    * Gets the currently logged-in user as an object.
+    * */
     @Override
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return getByUsername(authentication.getName());
     }
 
+    /*
+    * Gets a list of all user objects that match the searched email address, phone number, first name or surname
+    * of a user in the database.
+    * */
     @Override
     public List<User> getUser(String search) {
         return userRepository.findAllByUsernameLikeOrPhoneLikeOrNameLikeOrSurnameLike(search, search, search, search);
     }
 
+    /*
+    * Gets a list of all order objects that have been made by the user from the database.
+    * */
     @Override
     public List<Order> getOrder(User user) {
         return user.getOrderList();
     }
 
 
+    /*
+    * Validates user input for updating user objects.
+    * */
     private void validateUserInput(User user) {
         if(user.getName() == null || user.getName().length() < 2 || user.getName().length() > 15) {
             throw new InvalidUserInputException("Invalid user first name");

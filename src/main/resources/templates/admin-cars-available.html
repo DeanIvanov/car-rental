@@ -45,7 +45,7 @@
         <th class="header">available</th>
     </tr>
     <tr th:each="car : ${cars}">
-        <td> <img class="img" th:src="@{${'/images/' + car.type + '.jpg'}}"></td>
+        <td> <img class="img" th:src="@{${'/images/' + car.id + '.jpg'}}"></td>
         <td class="id" th:text="${car.id}">id</td>
         <td class="name" th:text="${car.name}">name</td>
         <td class="model" th:text="${car.model}">model</td>

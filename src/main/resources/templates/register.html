@@ -46,7 +46,7 @@
     <input type="password" minlength="5" maxlength="68" placeholder="Enter Password" th:name="password" th:id="password" required>
 
 	<label th:for="dob"><b>Date of birth</b></label>
-	<input type="date" placeholder="Enter date of birth" th:name="dob" th:id="dob" required><br>
+	<input type="date" placeholder="Enter date of birth" th:name="dob" th:id="dob" max="2005-07-04" required><br>
 	
 	<label th:for="phone"><b>Phone number</b></label>
 	<input type="text" minlength="10" maxlength="13" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  placeholder="Enter Phone number" th:name="phone" th:id="phone"required>

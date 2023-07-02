@@ -113,7 +113,7 @@
   <div class="row text-center">
     <div class="col-md-4 pb-1 pb-md-0" th:each="car : ${cars}">
       <div class="card">
-        <td> <img class="img" th:src="@{${'/images/' + car.type + '.jpg'}}"></td>
+        <td> <img class="img" th:src="@{${'/images/' + car.id + '.jpg'}}"></td>
         <div class="card-body">
           <h5 class="card-title" th:text="${car.name} + ' ' + ${car.model}">Car model</h5>
 

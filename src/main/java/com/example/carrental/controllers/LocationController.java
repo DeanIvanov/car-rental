@@ -32,7 +32,7 @@ public class LocationController {
 
         locationService.create(location);
 
-        return "index";
+        return "admin";
     }
 
 }

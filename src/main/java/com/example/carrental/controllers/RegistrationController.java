@@ -30,7 +30,7 @@ public class RegistrationController {
 
         userService.create(user.getId(),user);
 
-        return "index";
+        return "login";
     }
 
 }
