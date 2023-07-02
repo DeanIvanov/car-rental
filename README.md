@@ -1,6 +1,8 @@
 # Електронна система за наемане на автомобил (ЕСНА)
 
-Линк към Trello: [https://trello.com/b/rM7NYZwQ](https://trello.com/b/iBjcn2w8)
+[Линк към Trello](https://trello.com/b/iBjcn2w8)
+
+[Линк към документи на проекта в Google Drive](https://drive.google.com/drive/folders/1hnv0Lgb0yHw47ZZK6431leBNXpdeMvSv?usp=sharing)
 
 Проектът е система за наемане на кола, която предлага търсене и наемане на кола. Наемането се извършва от регистриран потребител, който е преминал през процес на търсене на кола, с параметри локация, дата на наемане и дата на оставане.
 
